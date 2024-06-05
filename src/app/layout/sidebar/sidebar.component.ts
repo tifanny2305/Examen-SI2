@@ -1,12 +1,21 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  public menu = routes
+    .map( route => route.children ?? [])
+    .flat()
+    .filter(route => route && route.path)
 
+  constructor(){
+    
+  }
 }
