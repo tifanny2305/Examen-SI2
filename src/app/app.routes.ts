@@ -13,6 +13,7 @@ import { GestionComponent } from './admin/gestion/gestion.component';
 import { GrupoComponent } from './admin/grupo/grupo.component';
 import { LicenciaComponent } from './admin/licencia/licencia.component';
 import { NivelComponent } from './admin/nivel/nivel.component';
+import { UsuarioComponent } from './admin/usuario/usuario.component';
 
 export const routes: Routes = [
     {
@@ -30,7 +31,13 @@ export const routes: Routes = [
                 path: 'dashboard',
                 title: 'Dashboard',
                 component: DashboardComponent,
-                data: { icon: 'fa-solid fa-gauge' }
+                /* data: { icon: 'fa-solid fa-gauge' } */
+              },
+              {
+                path: 'usuario',
+                title: 'usuario',
+                component: UsuarioComponent,
+                /* data: { icon: 'fa-solid fa-user' } */
               },
               {
                 path: 'administrador',

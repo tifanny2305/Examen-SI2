@@ -1,24 +1,29 @@
-<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-       <ul class="space-y-2 font-medium">
-        
-        @for(item of menu; track $index){
-            <li> <!-- Agregar la etiqueta de apertura de <li> -->
-                <a 
-                    [routerLink]="item.path"
-                    routerLinkActive="bg-blue-800"
-                    href="#" 
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <span class="inline-flex w-6 h-6 justify-center items-center">
-                        <i class="{{ item.data }} text-black"></i>
-                      </span>
-                    <div class="flex flex-col">
-                        <span class=" ms-3 text-lg font-bold leading-5 text-black">{{item.title}}</span>
-                        <span class=" ms-3 text-sm text-dark hidden md:block">{{ item.path }}</span>
-                    </div>
-                </a>
-            </li> <!-- Agregar la etiqueta de cierre de <li> -->
-        }
-       </ul>
-    </div>
+<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-[100vh] pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700 ease-in" aria-label="Sidebar">
+  <div class="h-full px-3 pb-4 overflow-y-auto bg-white-400 dark:bg-gray-500">
+     <ul class="space-y-2 font-medium">
+
+      @for(item of menu; track $index){
+          <li> <!-- Agregar la etiqueta de apertura de <li> -->
+              <a
+                  [routerLink]="item.path"
+                  routerLinkActive="bg-gray-300"
+                  href="#"
+                  class="flex items-center p-2 text-gray-500 rounded-lg dark:text-white hover:bg-gray-200 hover:opacity-100 dark:hover:bg-gray-700 group">
+
+                  <!-- <svg class="w-5 h-5 text-gray-600 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+
+                   </svg> -->
+                  <!--  <span>
+                    f<i class="fa-solid fa-chart-line"></i>
+                   </span> -->
+                  <div class="flex flex-col">
+                      <span class=" ms-3 text-lg font-bold leading-5 text-gray-600 hover:text-gray-800">{{item.title}}</span>
+                      <span class=" ms-3 text-sm text-gray-500 hover:text-gray-800 hidden md:block">{{ item.path }}</span>
+                  </div>
+              </a>
+          </li> <!-- Agregar la etiqueta de cierre de <li> -->
+      }
+
+     </ul>
+  </div>
 </aside>
