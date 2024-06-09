@@ -24,9 +24,10 @@ export class LoginComponent {
       (res: any) => {
         if (res.email === this.loginObj.email) {
           localStorage.setItem('login', JSON.stringify(res.data));
+          alert("Bienvenido")
           this.router.navigateByUrl('/dashboard');
         } else {
-          alert('No se puede iniciar sesión');
+          alert('No se puede iniciar sesteión');
         }
       },
       error => {
@@ -35,4 +36,32 @@ export class LoginComponent {
       }
     );
   }
+  /* loginObj: Login;
+
+  constructor(private http:HttpClient, private router: Router) {
+    this.loginObj = new Login();
+  }
+
+  onLogin() {
+    debugger;
+    this.http.post('http://localhost:8000/api/login', this.loginObj).subscribe((res:any)=>{
+      if (res.email === this.loginObj.email) {
+        alert("Login Success")
+        this.router.navigateByUrl('/dashboard')
+      } else{
+        alert(res.message)
+      }
+    });
+  }
+
+}
+
+export class Login {
+  email: string;
+  password: string;
+
+  constructor() {
+    this.email = '';
+    this.password = '';
+  } */
 }

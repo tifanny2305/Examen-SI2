@@ -6,9 +6,9 @@
           <li> <!-- Agregar la etiqueta de apertura de <li> -->
               <a
                   [routerLink]="item.path"
-                  routerLinkActive="bg-gray-300"
+                  routerLinkActive="bg-gray-700 text-gray-100"
                   href="#"
-                  class="flex items-center p-2 text-gray-500 rounded-lg dark:text-white hover:bg-gray-200 hover:opacity-100 dark:hover:bg-gray-700 group">
+                  class="flex items-center p-2 text-gray-500 hover:text-gray-700 rounded-lg dark:text-white hover:bg-gray-200 hover:opacity-100 dark:hover:bg-gray-700 group">
 
                   <!-- <svg class="w-5 h-5 text-gray-600 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
 
@@ -16,9 +16,9 @@
                   <!--  <span>
                     f<i class="fa-solid fa-chart-line"></i>
                    </span> -->
-                  <div class="flex flex-col">
-                      <span class=" ms-3 text-lg font-bold leading-5 text-gray-600 hover:text-gray-800">{{item.title}}</span>
-                      <span class=" ms-3 text-sm text-gray-500 hover:text-gray-800 hidden md:block">{{ item.path }}</span>
+                  <div class="flex flex-col ">
+                      <span class=" ms-3 text-lg font-bold leading-5  ">{{item.title}}</span>
+                      <span class=" ms-3 text-sm   hidden md:block">{{ item.path }}</span>
                   </div>
               </a>
           </li> <!-- Agregar la etiqueta de cierre de <li> -->

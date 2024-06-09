@@ -11,4 +11,7 @@ export class ApiService {
   login(Obj: any) {
     return this.http.post(this.apiUrl + 'login', Obj);
   }
+  getAllUsers() {
+    return this.http.get(this.apiUrl + 'user')
+  }
 }
