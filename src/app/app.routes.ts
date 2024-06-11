@@ -14,6 +14,8 @@ import { GrupoComponent } from './admin/grupo/grupo.component';
 import { LicenciaComponent } from './admin/licencia/licencia.component';
 import { NivelComponent } from './admin/nivel/nivel.component';
 import { UsuarioComponent } from './admin/usuario/usuario.component';
+import { CrearComponent } from './admin/materia/crear/crear.component';
+import { EditarComponent } from './admin/materia/editar/editar.component';
 
 export const routes: Routes = [
     {
@@ -55,7 +57,16 @@ export const routes: Routes = [
                 path: 'materia',
                 title: 'Materia',
                 component: MateriaComponent,
-                data: { icon: 'fa-solid fa-book' }
+                children:[
+                  {
+                    path: 'crear',
+                        component: CrearComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarComponent
+                  }
+                ]
               },
               {
                 path: 'modulo',
