@@ -14,6 +14,7 @@ import { GrupoComponent } from './admin/grupo/grupo.component';
 import { LicenciaComponent } from './admin/licencia/licencia.component';
 import { NivelComponent } from './admin/nivel/nivel.component';
 import { UsuarioComponent } from './admin/usuario/usuario.component';
+import { CarreraComponent } from './admin/carrera/carrera.component';
 
 export const routes: Routes = [
     {
@@ -104,6 +105,12 @@ export const routes: Routes = [
                 title: 'Nivel',
                 component: NivelComponent,
                 data: { icon: 'fa-solid fa-layer-group' }
+              },
+              {
+                path: 'carrera',
+                title: 'carrera',
+                component: CarreraComponent,
+                /* data: { icon: 'fa-solid fa-layer-group' } */
               },
         ]
     },
