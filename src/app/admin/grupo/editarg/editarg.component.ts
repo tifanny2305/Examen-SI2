@@ -6,14 +6,14 @@ import { FormsModule } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-editar',
+  selector: 'app-editarg',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './editar.component.html',
-  styleUrls: ['./editar.component.css']
+  templateUrl: './editarg.component.html',
+  styleUrls: ['./editarg.component.css']
 })
-export class EditarComponent implements OnInit {
-  materia: any = null;
+export class EditargComponent implements OnInit {
+  grupo: any = null;
   isLoading = false;
 
   constructor(
@@ -25,38 +25,38 @@ export class EditarComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.fetchMateria(id);
+      this.fetchGrupo(id);
     } else {
-      alert('ID de materia no encontrado');
-      this.router.navigate(['/materia']);
+      alert('ID de grupo no encontrado');
+      this.router.navigate(['/grupo']);
     }
   }
 
-  fetchMateria(id: string): void {
+  fetchGrupo(id: string): void {
     this.isLoading = true;
-    this.apiService.getMateriaById(id).subscribe(
+    this.apiService.getGrupoById(id).subscribe(
       (data: any) => {
-        this.materia = data;
+        this.grupo = data;
         this.isLoading = false;
       },
       error => {
-        console.error('Error al obtener la materia:', error);
+        console.error('Error al obtener el grupo', error);
         this.isLoading = false;
-        alert('Ocurrió un error al obtener la materia');
+        alert('Ocurrió un error al obtener el grupo');
       }
     );
   }
 
   onSubmit(): void {
     this.isLoading = true;
-    this.apiService.updateMateria(this.materia.id, this.materia).subscribe({
+    this.apiService.updateGrupo(this.grupo.id, this.grupo).subscribe({
       next: (response) => {
-        alert('Materia actualizada exitosamente');
+        alert('Grupo actualizada exitosamente');
         this.isLoading = false;
-        this.router.navigate(['/materia']);
+        this.router.navigate(['/grupo']);
       },
       error: (error) => {
-        console.error('Error al actualizar la materia:', error);
+        console.error('Error al actualizar el grupo:', error);
         this.isLoading = false;
         
       }
@@ -64,17 +64,17 @@ export class EditarComponent implements OnInit {
   }
 
   onDelete(): void {
-    const confirmDelete = confirm('¿Estás seguro de que deseas eliminar esta materia?');
+    const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este grupo?');
     if (confirmDelete) {
       this.isLoading = true;
-      this.apiService.deleteMateria(this.materia.id).subscribe({
+      this.apiService.deleteGrupo(this.grupo.id).subscribe({
         next: (response) => {
-          alert('Materia eliminada exitosamente');
+          alert('Grupo eliminada exitosamente');
           this.isLoading = false;
-          this.router.navigate(['/materia']);
+          this.router.navigate(['/grupo']);
         },
         error: (error) => {
-          console.error('Error al eliminar la materia:', error);
+          console.error('Error al eliminar la grupo:', error);
           this.isLoading = false;
           
         }

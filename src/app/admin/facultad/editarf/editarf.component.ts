@@ -4,16 +4,15 @@ import { ApiService } from '../../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
 @Component({
-  selector: 'app-editar',
+  selector: 'app-editarf',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './editar.component.html',
-  styleUrls: ['./editar.component.css']
+  templateUrl: './editarf.component.html',
+  styleUrl: './editarf.component.css'
 })
-export class EditarComponent implements OnInit {
-  materia: any = null;
+export class EditarfComponent implements OnInit {
+  facultad: any = null;
   isLoading = false;
 
   constructor(
@@ -25,38 +24,38 @@ export class EditarComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.fetchMateria(id);
+      this.fetchFacultad(id);
     } else {
-      alert('ID de materia no encontrado');
-      this.router.navigate(['/materia']);
+      alert('ID de facultad no encontrado');
+      this.router.navigate(['/facultad']);
     }
   }
 
-  fetchMateria(id: string): void {
+  fetchFacultad(id: string): void {
     this.isLoading = true;
-    this.apiService.getMateriaById(id).subscribe(
+    this.apiService.getFacultadById(id).subscribe(
       (data: any) => {
-        this.materia = data;
+        this.facultad = data;
         this.isLoading = false;
       },
       error => {
-        console.error('Error al obtener la materia:', error);
+        console.error('Error al obtener la facultad:', error);
         this.isLoading = false;
-        alert('Ocurrió un error al obtener la materia');
+        alert('Ocurrió un error al obtener la facultad');
       }
     );
   }
 
   onSubmit(): void {
     this.isLoading = true;
-    this.apiService.updateMateria(this.materia.id, this.materia).subscribe({
+    this.apiService.updateFacultad(this.facultad.id, this.facultad).subscribe({
       next: (response) => {
-        alert('Materia actualizada exitosamente');
+        alert('facultad actualizada exitosamente');
         this.isLoading = false;
-        this.router.navigate(['/materia']);
+        this.router.navigate(['/facultad']);
       },
       error: (error) => {
-        console.error('Error al actualizar la materia:', error);
+        console.error('Error al actualizar la facultad:', error);
         this.isLoading = false;
         
       }
@@ -64,17 +63,17 @@ export class EditarComponent implements OnInit {
   }
 
   onDelete(): void {
-    const confirmDelete = confirm('¿Estás seguro de que deseas eliminar esta materia?');
+    const confirmDelete = confirm('¿Estás seguro de que deseas eliminar esta facultad?');
     if (confirmDelete) {
       this.isLoading = true;
-      this.apiService.deleteMateria(this.materia.id).subscribe({
+      this.apiService.deleteFacultad(this.facultad.id).subscribe({
         next: (response) => {
-          alert('Materia eliminada exitosamente');
+          alert('facultad eliminada exitosamente');
           this.isLoading = false;
-          this.router.navigate(['/materia']);
+          this.router.navigate(['/facultad']);
         },
         error: (error) => {
-          console.error('Error al eliminar la materia:', error);
+          console.error('Error al eliminar la facultad:', error);
           this.isLoading = false;
           
         }

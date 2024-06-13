@@ -16,6 +16,21 @@ import { NivelComponent } from './admin/nivel/nivel.component';
 import { UsuarioComponent } from './admin/usuario/usuario.component';
 import { CrearComponent } from './admin/materia/crear/crear.component';
 import { EditarComponent } from './admin/materia/editar/editar.component';
+import { ListaComponent } from './admin/materia/lista/lista.component';
+import { FacultadComponent } from './admin/facultad/facultad.component';
+import { ListafComponent } from './admin/facultad/listaf/listaf.component';
+import { CrearfComponent } from './admin/facultad/crearf/crearf.component';
+import { EditarfComponent } from './admin/facultad/editarf/editarf.component';
+import { CrearGesComponent } from './admin/gestion/crear-ges/crear-ges.component';
+import { ListaGesComponent } from './admin/gestion/lista-ges/lista-ges.component';
+import { EditarGesComponent } from './admin/gestion/editar-ges/editar-ges.component';
+import { ListagComponent } from './admin/grupo/listag/listag.component';
+import { CreargComponent } from './admin/grupo/crearg/crearg.component';
+import { EditargComponent } from './admin/grupo/editarg/editarg.component';
+import { ListaUComponent } from './admin/usuario/lista-u/lista-u.component';
+import { CrearUComponent } from './admin/usuario/crear-u/crear-u.component';
+import { EditarUComponent } from './admin/usuario/editar-u/editar-u.component';
+
 
 export const routes: Routes = [
     {
@@ -39,7 +54,20 @@ export const routes: Routes = [
                 path: 'usuario',
                 title: 'usuario',
                 component: UsuarioComponent,
-                /* data: { icon: 'fa-solid fa-user' } */
+                children:[
+                  {
+                    path: '',
+                        component: ListaUComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearUComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarUComponent
+                  }
+                ]
               },
               {
                 path: 'administrador',
@@ -59,6 +87,10 @@ export const routes: Routes = [
                 component: MateriaComponent,
                 children:[
                   {
+                    path: '',
+                        component: ListaComponent
+                  },
+                  {
                     path: 'crear',
                         component: CrearComponent
                   },
@@ -73,6 +105,25 @@ export const routes: Routes = [
                 title: 'Modulo',
                 component: ModuloComponent,
                 data: { icon: 'fa-solid fa-cubes' }
+              },
+              {
+                path: 'facultad',
+                title: 'Facultad',
+                component: FacultadComponent,
+                children:[
+                  {
+                    path: '',
+                        component: ListafComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearfComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarfComponent
+                  }
+                ]
               },
               {
                 path: 'asistencia',
@@ -96,13 +147,39 @@ export const routes: Routes = [
                 path: 'gestion',
                 title: 'Gestion',
                 component: GestionComponent,
-                data: { icon: 'fa-solid fa-calendar-alt' }
+                children:[
+                  {
+                    path: '',
+                        component: ListaGesComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearGesComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarGesComponent
+                  }
+                ]
               },
               {
                 path: 'grupo',
                 title: 'Grupo',
                 component: GrupoComponent,
-                data: { icon: 'fa-solid fa-users' }
+                children:[
+                  {
+                    path: '',
+                        component: ListagComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CreargComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditargComponent
+                  }
+                ]
               },
               {
                 path: 'licencia',
