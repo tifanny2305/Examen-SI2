@@ -1,53 +1,45 @@
-<section class="bg-gray-300 px-5 py-5 h-screen hidden sm:block">
+<div class="bg-gray-300 px-10 py-7 2xl:py-14 h-screen hidden sm:block">
   <div class="w-full h-full flex justify-items-center">
     <div class="grid grid-cols-3 gap-8 w-full h-full">
-      <div class="card col-span-1 ">
-        <div class="h-full w-full">
-          <div class="md:mb-10 xl:mb-20">
-            <div class="flex items-center justify-center mb-5">
-              <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-slate-700 space-x-2"> <i class="fa-solid fa-school"></i>
-                Univ-Sys</span>
+      <div class="card col-span-1 2xl:h-[800px]">
+        <div class="h-full w-full ">
+          <div class="md:mb-10 xl:mb-20 2xl:mb-28">
+            <div class="flex items-center justify-center mb-10">
+              <span class="self-center text-xl font-semibold sm:text-2xl 2xl:text-5xl whitespace-nowrap text-slate-700 space-x-2">
+                <i class="fa-solid fa-school"></i> Univ-Sys
+              </span>
             </div>
             <div class="flex items-center justify-center">
-              <a
-                href="#"
-                class="flex items-center text-[10px] sm:text-2xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-900"
-              >
+              <a href="#" class="flex items-center text-[10px] sm:text-2xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-5xl font-semibold text-gray-900">
                 Bienvenido a Uni-Sys
               </a>
             </div>
-            <h1
-              class="flex items-center justify-center text-gray-600 xl:text-lg 2xl:text-xl"
-            >
+            <h1 class="flex items-center justify-center text-gray-600 xl:text-lg 2xl:text-xl">
               Por favor introduzca sus datos
             </h1>
           </div>
           <form (ngSubmit)="onLogin()" class="">
             <div class="flex lg:mb-7 xl:mb-10 2xl:mb-14">
-              <label
-                for="email"
-                class="font-semibold absolute text-sm xl:text-lg 2xl:text-xl text-gray-500 -translate-y-5 xl:-translate-y-7"
-                >Tu correo electrónico</label
-              >
+              <label for="username" class="font-semibold absolute text-sm xl:text-lg 2xl:text-2xl text-gray-500 -translate-y-5 xl:-translate-y-7 2xl:-translate-y-10">
+                Tu nombre de usuario
+              </label>
               <input
-                type="email"
-                [(ngModel)]="loginObj.email"
-                name="email"
-                id="email"
+                type="text"
+                [(ngModel)]="username"
+                name="username"
+                id="username"
                 class="block py-2.5 px-0 w-full text-sm 2xl:text-xl text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder="nombre@empresa.com"
+                placeholder=""
                 required
               />
             </div>
-            <div class="flex lg:mb-4 xl:mb-7">
-              <label
-                for="password"
-                class="font-semibold absolute text-sm xl:text-lg 2xl:text-xl text-gray-500 -translate-y-5 xl:-translate-y-7"
-                >Contraseña</label
-              >
+            <div class="flex lg:mb-7 xl:mb-10 2xl:mb-14">
+              <label for="password" class="font-semibold absolute text-sm xl:text-lg 2xl:text-2xl text-gray-500 -translate-y-5 xl:-translate-y-7 2xl:-translate-y-10">
+                Contraseña
+              </label>
               <input
                 type="password"
-                [(ngModel)]="loginObj.password"
+                [(ngModel)]="password"
                 name="password"
                 id="password"
                 placeholder=""
@@ -66,11 +58,7 @@
                   />
                 </div>
                 <div class="ml-3 text-sm">
-                  <label
-                    for="remember"
-                    class="text-gray-500 text-sm xl:text-lg 2xl:text-xl"
-                    >Recuérdame</label
-                  >
+                  <label for="remember" class="text-gray-500 text-sm xl:text-lg 2xl:text-xl">Recuérdame</label>
                 </div>
               </div>
             </div>
@@ -78,30 +66,30 @@
               <button
                 type="submit"
                 class="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm xl:text-lg 2xl:text-xl px-5 py-2.5 me-2 mb-2"
-                (click)="onLogin()"
-                >
+              >
                 Iniciar sesión
               </button>
             </div>
           </form>
         </div>
       </div>
-      <div class="col-span-2">
-        <div class="w-full h-[450px] xl:h-[698px]  2xl:h-[750px]  flex items-center justify-center ">
+      <div class="col-span-2 ">
+        <div class="mt-24 w-full h-[250px] xl:h-[410px]  2xl:h-[700px]  flex items-center  ">
           <img
-            src="https://laravel-f.s3.amazonaws.com/configuracions/9uo6XqQifGQEM6TDrUmapLKdzaSMxlsq2fAob6ie.png"
+            src="https://laravel-f.s3.amazonaws.com/configuracions/yHWcWD8sFQCtMZtzoNHoboBIE86eQjALy30aIn2l.png"
             alt=""
-            class=" object-center object-contain   h-full w-full"
+            class=" w-full "
           />
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
+
 
 <!-- login movil -->
 
-<section class="bg-gray-50 block sm:hidden">
+<!-- <section class="bg-gray-50 block sm:hidden">
   <div
     class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-full"
   >
@@ -128,19 +116,19 @@
         <form (ngSubmit)="onLogin()" class="p-6 space-y-4 md:space-y-6">
           <div>
             <label
-              for="email"
+              for="username"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >Your email</label
             >
             <input
-              type="email"
-              [(ngModel)]="loginObj.email"
-              name="email"
-              id="email"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder=""
-              required=""
-            />
+                type="text"
+                [(ngModel)]="username"
+                name="username"
+                id="username"
+                class="block py-2.5 px-0 w-full text-sm 2xl:text-xl text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=""
+                required
+              />
           </div>
           <div>
             <label
@@ -150,7 +138,7 @@
             >
             <input
               type="password"
-              [(ngModel)]="loginObj.password"
+              [(ngModel)]="password"
               name="password"
               id="password"
               placeholder=""
@@ -186,4 +174,5 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
+

@@ -1,28 +1,39 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Route } from '@angular/router';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginObj: any = {
-    email: '',
-    password: '',
-  };
-  constructor(private roomSrv: ApiService, private router: Router) {}
+  username: string = '';
+  password: string = '';
+  errorMessage: string = '';
+
+  constructor(private apiService: ApiService, private router: Router) {}
+
+  onLogin(): void {
+    this.apiService.login(this.username, this.password).subscribe({
+      next: () => this.router.navigate(['/dashboard']),
+      error: (err) => {
+        console.error('Error en el login:', err);
+        this.errorMessage = 'Nombre de usuario o contraseña incorrectos';
+      }
+    });
+  }
+
+
+  /*
+  will
   onLogin() {
     this.roomSrv.login(this.loginObj).subscribe(
       (res: any) => {
-        if (res.email === this.loginObj.email) {
+        if (res.username === this.loginObj.username) {
           localStorage.setItem('login', JSON.stringify(res.data));
           alert("Bienvenido")
           this.router.navigateByUrl('/dashboard');
@@ -36,7 +47,11 @@ export class LoginComponent {
       }
     );
   }
-  /* loginObj: Login;
+  
+  */
+  
+  
+  /* loginObj: Login; tiff
 
   constructor(private http:HttpClient, private router: Router) {
     this.loginObj = new Login();

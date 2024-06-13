@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-materia',
   standalone: true,
-  imports: [],
-  templateUrl: './materia.component.html',
-  styleUrl: './materia.component.css'
+  imports: [RouterModule],
+  template: '<router-outlet></router-outlet>',
+  styleUrls: ['./materia.component.css']
 })
-export class MateriaComponent {
-
-}
+export class MateriaComponent {}
