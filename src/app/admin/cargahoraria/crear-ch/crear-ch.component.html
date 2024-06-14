@@ -1,1 +1,88 @@
-<p>crear-ch works!</p>
+<div class="max-w-lg mx-auto mt-8">
+    <h2 class="text-xl font-semibold mb-4">Crear Nueva Carga Horaria</h2>
+    <form [formGroup]="cargahorariaForm" (ngSubmit)="onCreate()">
+
+        <!-- fecha -->
+      <div class="mb-4">
+        <label for="fecha" class="block text-sm font-medium text-gray-700">fecha</label>
+        <input type="date" id="fecha" formControlName="fecha" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+        <div *ngIf="cargahorariaForm.get('fecha')?.invalid && cargahorariaForm.get('fecha')?.touched">
+
+        </div>
+      </div>
+
+      <!-- docente -->
+      <div class="mb-4" formGroupName="docente">
+        <label for="docenteaId" class="block text-sm font-medium text-gray-700">docente</label>
+        <select id="mdocenteId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+          <option *ngFor="let docente of docentes" [value]="docente.id">{{ docente.nombre }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('docente.id')?.invalid && cargahorariaForm.get('docente.id')?.touched">
+
+        </div>
+      </div>
+
+      <!-- administrador -->
+      <div class="mb-4" formGroupName="administrador">
+        <label for="administradorId" class="block text-sm font-medium text-gray-700">administrador</label>
+        <select id="administradorId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+          <option *ngFor="let administrador of administradores" [value]="administrador.id">{{ administrador.nombre }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('administrador.id')?.invalid && cargahorariaForm.get('administrador.id')?.touched">
+
+        </div>
+      </div>
+
+      <!-- gestion -->
+      <div class="mb-4" formGroupName="gestion">
+        <label for="gestionId" class="block text-sm font-medium text-gray-700">gestion</label>
+        <select id="gestionId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+          <option *ngFor="let gestion of gestiones" [value]="gestion.id">{{ gestion.nombre }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('gestion.id')?.invalid && cargahorariaForm.get('gestion.id')?.touched">
+
+        </div>
+      </div>
+
+
+      <!-- materia -->
+      <div class="mb-4" formGroupName="materia">
+        <label for="materiaId" class="block text-sm font-medium text-gray-700">Materia</label>
+        <select id="materiaId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+          <option *ngFor="let materia of materias" [value]="materia.id">{{ materia.nombre }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('materia.id')?.invalid && cargahorariaForm.get('materia.id')?.touched">
+
+        </div>
+      </div>
+
+      <!-- grupo -->
+      <div class="mb-4" formGroupName="grupo">
+        <label for="grupoId" class="block text-sm font-medium text-gray-700">Grupo</label>
+        <select id="grupoId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+          <option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.sigla }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('grupo.id')?.invalid && cargahorariaForm.get('grupo.id')?.touched">
+
+        </div>
+      </div>
+
+      <!-- carrera -->
+      <div class="mb-4" formGroupName="carrera">
+        <label for="carreraId" class="block text-sm font-medium text-gray-700">carrera</label>
+        <select id="carreraId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+          <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('carrera.id')?.invalid && cargahorariaForm.get('carrera.id')?.touched">
+
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+            Crear Carga Horario
+        </button>
+      </div>
+
+    </form>
+</div>

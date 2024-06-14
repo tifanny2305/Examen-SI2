@@ -1,1 +1,31 @@
-<p>editar-ges works!</p>
+<form [formGroup]="gestionForm" (ngSubmit)="update()">
+    <!-- Nonmbre -->
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" formControlName="nombre">
+      <div *ngIf="gestionForm.get('nombre')?.invalid && gestionForm.get('nombre')?.touched">
+        El nombre es requerido.
+      </div>
+    </div>
+
+    <!-- fecha inicio -->
+    <div>
+        <label for="fechaInicio">selecione la fecha de inicio:</label>
+        <input id="date" formControlName="fechaInicio">
+        <div *ngIf="gestionForm.get('fechaInicio')?.invalid && gestionForm.get('fechaInicio')?.touched">
+          La fecha inicio es requerido.
+        </div>
+      </div>
+
+    <!-- fecha fin -->
+    <div>
+        <label for="fechaFin">seleccione la fecha final:</label>
+        <input id="date" formControlName="fechaFin">
+        <div *ngIf="gestionForm.get('fechaFin')?.invalid && gestionForm.get('fechaFin')?.touched">
+          La fecha fin es requerido.
+        </div>
+      </div>
+  
+    <button type="submit" [disabled]="gestionForm.invalid">Actualizar</button>
+    <button type="button" (click)="onDelete()" [disabled]="gestionForm.invalid">Eliminar</button>
+  </form>
