@@ -25,11 +25,11 @@ export class ListafComponent implements OnInit{
     this.apiService.getAllFacultades().subscribe(
       (data: any) => {
         this.facultades = data;
-        this.isLoading = false; // Finaliza el indicador de carga
+        this.isLoading = false; 
       },
       error => {
         console.error('Error al obtener las facultades:', error);
-        this.isLoading = false; // Finaliza el indicador de carga en caso de error
+        this.isLoading = false; 
         alert('Ocurrió un error al obtener las facultades');
       }
     );

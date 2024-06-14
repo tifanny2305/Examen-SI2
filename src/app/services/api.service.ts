@@ -61,7 +61,7 @@ export class ApiService {
     this.router.navigate(['/login']);
   }
 
-  // --------------------------- Materia
+  // --------------------------- Materia -------------------------------------------------------------------------------------------------------------------------------------------------
   
   getAllMaterias(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/materia/findAll`);
@@ -133,7 +133,7 @@ export class ApiService {
       );
   }
 
-  // --------------------------- Facultad
+  // --------------------------- Facultad ------------------------------------------------------------------------------------------------------------------------------------------------
 
    getAllFacultades(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/facultad/findAll`);
@@ -205,7 +205,7 @@ export class ApiService {
       );
   }
 
-  // --------------------------- Grupo
+  // --------------------------- Grupo ------------------------------------------------------------------------------------------------------------------------------------------
 
   getAllGrupos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/grupo/findAll`);
@@ -277,7 +277,7 @@ export class ApiService {
       );
   }
 
-  // --------------------------- Usuario
+  // --------------------------- Usuario -----------------------------------------------------------------------------------------------------------------------------------------------
 
   getAllUsuarios(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/usuario/findAll`);
@@ -366,4 +366,120 @@ export class ApiService {
         })
       );
   }
+
+  // --------------------------- Carrera -----------------------------------------------------------------------------------------------------------------------------------------
+  
+  getAllCarreras(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/carrera/findAll`);
+  }
+
+  getCarreraById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/carrera/find/${id}`);
+  }
+
+  createCarrera(carrera: { nombre: string, facultad: { id: number } }): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/carrera/save`, carrera, { headers: headers })
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear la carrera:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  // ------------------------------------ Modulo-------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllModulos(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/modulo/findAll`);
+  }
+
+  getModuloById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/modulo/find/${id}`);
+  }
+
+  // ------------------------------------ Administradores -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllAdministradores(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/admin/findAll`);
+  }
+
+  getAdministradorById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/admin/find/${id}`);
+  }
+
+  // ------------------------------------ Docenete -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllDocentes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/docente/findAll`);
+  }
+
+  getDoceneteById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/docente/find/${id}`);
+  }
+
+  // ------------------------------------ Asistencia -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllAsistencias(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/asistencia/findAll`);
+  }
+
+  getAsistenciaById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/asistencia/find/${id}`);
+  }
+
+  // ------------------------------------ Aula -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllAula(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/aula/findAll`);
+  }
+
+  getAulaById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/aula/find/${id}`);
+  }
+
+  // ------------------------------------ Carga Horaria -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllCargaHorarias(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/cargahoraria/findAll`);
+  }
+
+  getCargaHorariaById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/cargahoraria/find/${id}`);
+  }
+
+  // ------------------------------------ Gestion -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllGestiones(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/gestion/findAll`);
+  }
+
+  getGestionById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/gestion/find/${id}`);
+  }
+
+  // ------------------------------------ Horario -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllHorarios(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/horario/findAll`);
+  }
+
+  getHorarioById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/horario/find/${id}`);
+  }
+
+
+
+
+
+
 }

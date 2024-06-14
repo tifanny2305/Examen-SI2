@@ -1,0 +1,22 @@
+
+<div class="max-w-lg mx-auto mt-8">
+    <h2 class="text-xl font-semibold mb-4">Crear Nueva Carrera</h2>
+    <form [formGroup]="carreraForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+            <input type="text" id="nombre" formControlName="nombre"
+                class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+        </div>
+        <div class="mb-4">
+            <label for="facultad" class="block text-sm font-medium text-gray-700">Facultad</label>
+            <select id="facultad" formControlName="facultadId"
+                    class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+              <option [value]="null">Seleccione la facultad</option>
+              <option *ngFor="let facultad of facultades" [ngValue]="facultad">{{ facultad.nombre }}</option>
+            </select>
+          </div>
+      <div class="flex justify-end">
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Crear Materia</button>
+      </div>
+    </form>
+  </div>
