@@ -450,6 +450,69 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/api/modulo/find/${id}`);
   }
 
+  createModulo(modulo: any ): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/modulo/save`, modulo, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear el modulo:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateModulo(id: string, modulo: any): Observable<any> {
+    const token = this.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/modulo/update/${id}`, modulo, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar el modulo';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+}
+ 
+  deleteModulo(id: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/modulo/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar el modulo';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
+  }
+
   // ------------------------------------ Administradores -------------------------------------------------------------------------------------------------------------------------------------
 
   getAllAdministradores(): Observable<any[]> {
@@ -488,6 +551,69 @@ export class ApiService {
 
   getAulaById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/api/aula/find/${id}`);
+  }
+
+  createAula(aula: any ): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/aula/save`, aula, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear el aula:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateAula(id: string, aula: any): Observable<any> {
+    const token = this.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/aula/update/${id}`, aula, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar el aula';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+}
+ 
+  deleteAula(id: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/aula/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar el aula';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
   }
 
   // ------------------------------------ Carga Horaria -------------------------------------------------------------------------------------------------------------------------------------

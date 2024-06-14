@@ -1,1 +1,22 @@
-<p>editar-aul works!</p>
+<form [formGroup]="aulaForm" (ngSubmit)="update()">
+    <div>
+      <label for="numero">Numero:</label>
+      <input id="numero" formControlName="numero">
+      <div *ngIf="aulaForm.get('numero')?.invalid && aulaForm.get('numero')?.touched">
+        El numero es requerido.
+      </div>
+    </div>
+  
+    <div formGroupName="modulo"> 
+      <label for="moduloId">Modulo:</label>
+      <select id="moduloId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+        <option *ngFor="let modulo of modulos" [value]="modulo.id">{{ modulo.nombre }}</option>
+      </select>
+      <div *ngIf="aulaForm.get('modulo.id')?.invalid && aulaForm.get('modulo.id')?.touched">
+        La modulo es requerida.
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="aulaForm.invalid">Actualizar</button>
+    <button type="button" (click)="onDelete()" [disabled]="aulaForm.invalid">Eliminar</button>
+</form>

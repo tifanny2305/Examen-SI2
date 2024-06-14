@@ -1,1 +1,22 @@
-<p>editar-mod works!</p>
+<form [formGroup]="moduloForm" (ngSubmit)="update()">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" formControlName="nombre">
+      <div *ngIf="moduloForm.get('nombre')?.invalid && moduloForm.get('nombre')?.touched">
+        El nombre es requerido.
+      </div>
+    </div>
+  
+    <div formGroupName="facultad"> 
+      <label for="facultadId">Facultad:</label>
+      <select id="facultadId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+        <option *ngFor="let facultad of facultades" [value]="facultad.id">{{ facultad.nombre }}</option>
+      </select>
+      <div *ngIf="moduloForm.get('facultad.id')?.invalid && moduloForm.get('facultad.id')?.touched">
+        La facultad es requerida.
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="moduloForm.invalid">Actualizar</button>
+    <button type="button" (click)="onDelete()" [disabled]="moduloForm.invalid">Eliminar</button>
+  </form>
