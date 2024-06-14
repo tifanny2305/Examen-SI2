@@ -1,19 +1,18 @@
 <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-[100vh] pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700 ease-in" aria-label="Sidebar">
-  <div class="h-full px-3 pb-4 overflow-y-auto bg-white-400 dark:bg-gray-500">
+  <div class="h-full px-3 pb-4 overflow-y-auto bg-white ">
      <ul class="space-y-2 font-medium">
 
       @for(item of menu; track $index){
           <li> <!-- Agregar la etiqueta de apertura de <li> -->
               <a
-
                   [routerLink]="item.path"
-                  routerLinkActive="bg-gray-700 text-white"
-=======
+                  routerLinkActive="bg-gray-700 text-white shadow"
+
                   [routerLink]="[item.path]"
-                  routerLinkActive="bg-gray-700 text-gray-100"
+                  routerLinkActive="bg-gray-700 text-white shadow-md shadow-graygreen-1100"
 
                   href="#"
-                  class="flex items-center p-2 text-gray-500 hover:text-gray-700 rounded-lg dark:text-white hover:bg-gray-200 hover:opacity-100 dark:hover:bg-gray-700 group">
+                  class="flex items-center p-2 text-gray-500 hover:text-gray-700 rounded-lg shadow-md shadow-gray-800 dark:text-white hover:bg-gray-200 hover:opacity-100  group">
 
                   <!-- <svg class="w-5 h-5 text-gray-600 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
 

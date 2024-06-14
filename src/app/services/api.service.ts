@@ -12,7 +12,7 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class ApiService {
-  apiUrl: string = "http://localhost:8080";
+  apiUrl: string = "http://localhost:8081";
   tokenKey = 'authToken';
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -38,7 +38,7 @@ export class ApiService {
     }
     return null;
   }
-  
+
   private setToken(token: string): void {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem(this.tokenKey, token);
@@ -62,7 +62,7 @@ export class ApiService {
   }
 
   // --------------------------- Materia
-  
+
   getAllMaterias(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/materia/findAll`);
   }
@@ -156,18 +156,18 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/api/facultad/save`, { nombre: nombre }, { headers: headers })
       .pipe(
         catchError(error => {
-          console.error('Error al crear la materia:', error);
+          console.error('Error al crear la facultad:', error);
           return throwError(error);
         })
       );
   }
 
-  updateFacultad(id: string, materia: any): Observable<any> {
+  updateFacultad(id: string, facultad: any): Observable<any> {
     const token = this.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put<any>(`${this.apiUrl}/api/facultad/update/${id}`, materia, { headers, responseType: 'text' as 'json' }).pipe(
+    return this.http.put<any>(`${this.apiUrl}/api/facultad/update/${id}`, facultad, { headers, responseType: 'text' as 'json' }).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'Error desconocido al actualizar la faculad';
         if (error.error instanceof ErrorEvent) {
@@ -215,7 +215,7 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/api/grupo/find/${id}`);
   }
 
-  createGrupo(grupo: string): Observable<any> {
+  createGrupo(sigla: string): Observable<any> {
     if (!this.isAuthenticated()) {
       return throwError('Token is invalid or expired');
     }
@@ -225,7 +225,7 @@ export class ApiService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.post<any>(`${this.apiUrl}/api/grupo/save`, { grupo: grupo }, { headers: headers })
+    return this.http.post<any>(`${this.apiUrl}/api/grupo/save`, { sigla: sigla }, { headers: headers })
       .pipe(
         catchError(error => {
           console.error('Error al crear el grupo:', error);
@@ -234,12 +234,12 @@ export class ApiService {
       );
   }
 
-  updateGrupo(id: string, grupo: any): Observable<any> {
+  updateGrupo(id: string, sigla: any): Observable<any> {
     const token = this.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put<any>(`${this.apiUrl}/api/grupo/update/${id}`, grupo, { headers, responseType: 'text' as 'json' }).pipe(
+    return this.http.put<any>(`${this.apiUrl}/api/grupo/update/${id}`, sigla, { headers, responseType: 'text' as 'json' }).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'Error desconocido al actualizar el grupo';
         if (error.error instanceof ErrorEvent) {
