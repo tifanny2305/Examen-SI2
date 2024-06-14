@@ -388,13 +388,62 @@ export class ApiService {
         'Content-Type': 'application/json'
     });
 
-    return this.http.post<any>(`${this.apiUrl}/api/carrera/save`, carrera, { headers: headers })
+    return this.http.post<any>(`${this.apiUrl}/api/carrera/save`, carrera, { headers : headers})
     .pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error al crear la carrera:', error.message, error.status, error);
         return throwError(error);
       })
     );
+  }
+
+  updateCarrera(id: string, carrera: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.apiUrl}/api/carrera/update/${id}`, carrera, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar la carrera';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+  }
+  
+  
+
+  deleteCarrera(id: string): Observable<any> {
+    if (!this.isAuthenticated()) {
+      return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/carrera/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar la carrera';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
   }
 
   // ------------------------------------ Modulo-------------------------------------------------------------------------------------------------------------------------------------
