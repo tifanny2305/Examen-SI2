@@ -162,12 +162,12 @@ export class ApiService {
       );
   }
 
-  updateFacultad(id: string, materia: any): Observable<any> {
+  updateFacultad(id: string, facultad: any): Observable<any> {
     const token = this.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put<any>(`${this.apiUrl}/api/facultad/update/${id}`, materia, { headers, responseType: 'text' as 'json' }).pipe(
+    return this.http.put<any>(`${this.apiUrl}/api/facultad/update/${id}`, facultad, { headers, responseType: 'text' as 'json' }).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'Error desconocido al actualizar la faculad';
         if (error.error instanceof ErrorEvent) {
@@ -377,7 +377,7 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/api/carrera/find/${id}`);
   }
 
-  createCarrera(carrera: { nombre: string, facultad: { id: number } }): Observable<any> {
+  createCarrera(carrera: any ): Observable<any> {
     if (!this.isAuthenticated()) {
         return throwError('Token is invalid or expired');
     }
@@ -398,35 +398,29 @@ export class ApiService {
   }
 
   updateCarrera(id: string, carrera: any): Observable<any> {
-    const token = this.getToken();
+    const token = this.getToken(); 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put<any>(`${this.apiUrl}/api/carrera/update/${id}`, carrera, { headers }).pipe(
+
+    return this.http.put<any>(`${this.apiUrl}/api/carrera/update/${id}`, carrera, { headers, responseType: 'text' as 'json' }).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'Error desconocido al actualizar la carrera';
         if (error.error instanceof ErrorEvent) {
           errorMessage = `Error: ${error.error.message}`;
         } else {
-          errorMessage = `Error: ${error.status}: ${error.error.message}`;
+          errorMessage = `Error: ${error.status}: ${error.message}`;
         }
         console.error(errorMessage);
         return throwError(errorMessage);
       })
     );
-  }
-  
-  
-
+}
+ 
   deleteCarrera(id: string): Observable<any> {
-    if (!this.isAuthenticated()) {
-      return throwError('Token is invalid or expired');
-    }
-
     const token = this.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
     });
 
     return this.http.delete(`${this.apiUrl}/api/carrera/delete/${id}`, { headers, responseType: 'text' as 'json' })

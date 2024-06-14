@@ -1,33 +1,22 @@
-<div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Editar Carrera</h1>
-  
-    <form [formGroup]="carreraForm" (ngSubmit)="update()">
-      <div class="mb-4">
-        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-        <input
-          type="text"
-          id="nombre"
-          formControlName="nombre"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-      <div class="mb-4">
-        <label for="facultad" class="block text-sm font-medium text-gray-700">Facultad</label>
-        <select id="facultad" formControlName="facultadId"
-                class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-          <option [ngValue]="null">Seleccione la facultad</option>
-          <option *ngFor="let facultad of facultades" [ngValue]="facultad.id">{{ facultad.nombre }}</option>
-        </select>
-      </div>
-  
-      <div class="flex space-x-4">
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-          Actualizar
-        </button>
-        <button type="button" (click)="onDelete()" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
-          Eliminar
-        </button>
-      </div>
-    </form>
+<form [formGroup]="carreraForm" (ngSubmit)="update()">
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" formControlName="nombre">
+    <div *ngIf="carreraForm.get('nombre')?.invalid && carreraForm.get('nombre')?.touched">
+      El nombre es requerido.
+    </div>
   </div>
-  
+
+  <div formGroupName="facultad"> 
+    <label for="facultadId">Facultad:</label>
+    <select id="facultadId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+      <option *ngFor="let facultad of facultades" [value]="facultad.id">{{ facultad.nombre }}</option>
+    </select>
+    <div *ngIf="carreraForm.get('facultad.id')?.invalid && carreraForm.get('facultad.id')?.touched">
+      La facultad es requerida.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="carreraForm.invalid">Actualizar</button>
+  <button type="button" (click)="onDelete()" [disabled]="carreraForm.invalid">Eliminar</button>
+</form>
