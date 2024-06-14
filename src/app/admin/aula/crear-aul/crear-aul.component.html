@@ -1,1 +1,55 @@
-<p>crear-aul works!</p>
+
+<div class="card">
+  <h2 class="text-xl font-semibold mb-4">Crear Nueva Aula</h2>
+  <form [formGroup]="aulaForm" (ngSubmit)="onCreate()">
+    <div class="mb-4">
+      <label for="numero" class="block text-sm font-medium text-gray-700"
+        >Numero</label
+      >
+      <input
+        type="text"
+        id="numero"
+        formControlName="numero"
+        class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+        required
+      />
+      <div
+        *ngIf="
+          aulaForm.get('numero')?.invalid && aulaForm.get('numero')?.touched
+        "
+      ></div>
+    </div>
+    <div class="mb-4" formGroupName="modulo">
+      <label for="moduloId" class="block text-sm font-medium text-gray-700"
+        >Modulo</label
+      >
+      <select
+        id="moduloId"
+        formControlName="id"
+        class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+        required
+      >
+      <option value="" disabled selected >Seleccione una Facultad</option>
+        <option *ngFor="let modulo of modulos" [value]="modulo.id">
+          {{ modulo.nombre }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          aulaForm.get('modulo.id')?.invalid &&
+          aulaForm.get('modulo.id')?.touched
+        "
+      >
+        La modulo es requerida.
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <button
+        type="submit"
+        class="btngray"
+      >
+      <i class="fa-solid fa-bookmark"></i>  Crear Aula
+      </button>
+    </div>
+  </form>
+</div>

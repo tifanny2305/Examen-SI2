@@ -1,17 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../../services/api.service';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-editarc',
+  standalone: true,
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './editarc.component.html',
   styleUrls: ['./editarc.component.css']
 })
 export class EditarcComponent implements OnInit {
   carreraForm: FormGroup;
   isLoading = false;
-  facultades: any[] = []; 
+  facultades: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,10 +22,13 @@ export class EditarcComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    //body de la consulta
     this.carreraForm = this.formBuilder.group({
-      id: [''], // Se espera recibir el ID de la carrera desde la ruta, no se inicializa aquí
+      id: [''],
       nombre: ['', Validators.required],
-      facultadId: ['', Validators.required]
+      facultad: this.formBuilder.group({
+        id: ['', Validators.required]
+      })
     });
   }
 
@@ -30,9 +36,9 @@ export class EditarcComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.fetchCarrera(id);
-      this.fetchFacultades(); 
+      this.fetchFacultades();
     } else {
-      alert('ID de carrera no encontrado');
+      /* alert('ID de carrera no encontrado'); */
       this.router.navigate(['/carrera']);
     }
   }
@@ -42,13 +48,13 @@ export class EditarcComponent implements OnInit {
     this.apiService.getCarreraById(id).subscribe(
       (data: any) => {
         // Utiliza patchValue para establecer los valores recibidos en el formulario
-        this.carreraForm.patchValue(data); 
+        this.carreraForm.patchValue(data);
         this.isLoading = false;
       },
       error => {
         console.error('Error al obtener la carrera', error);
         this.isLoading = false;
-        alert('Ocurrió un error al obtener la carrera');
+        /* alert('Ocurrió un error al obtener la carrera'); */
       }
     );
   }
@@ -60,7 +66,7 @@ export class EditarcComponent implements OnInit {
       },
       error => {
         console.error('Error al obtener las facultades', error);
-        alert('Ocurrió un error al obtener las facultades');
+        /* alert('Ocurrió un error al obtener las facultades'); */
       }
     );
   }
@@ -69,21 +75,21 @@ export class EditarcComponent implements OnInit {
     if (this.carreraForm.valid) {
       this.isLoading = true;
       const carreraData = this.carreraForm.value;
-      // Envía solo carreraData, no carreraData.id como primer argumento
+      console.log(carreraData);
       this.apiService.updateCarrera(carreraData.id, carreraData).subscribe({
         next: (response) => {
-          alert('Carrera actualizada exitosamente');
+          /* alert('Carrera actualizada exitosamente'); */
           this.isLoading = false;
           this.router.navigate(['/carrera']);
         },
         error: (error) => {
           console.error('Error al actualizar la carrera:', error);
           this.isLoading = false;
-          alert('Ocurrió un error al actualizar la carrera');
+          /* alert('Ocurrió un error al actualizar la carrera. Verifica los permisos.'); */
         }
       });
     } else {
-      alert('Por favor completa el formulario correctamente');
+      /* alert('Por favor completa el formulario correctamente'); */
     }
   }
 
@@ -92,16 +98,17 @@ export class EditarcComponent implements OnInit {
     if (confirmDelete) {
       this.isLoading = true;
       const carreraId = this.carreraForm.value.id;
+      console.log(carreraId);
       this.apiService.deleteCarrera(carreraId).subscribe({
         next: (response) => {
-          alert('Carrera eliminada exitosamente');
+          /* alert('Carrera eliminada exitosamente'); */
           this.isLoading = false;
           this.router.navigate(['/carrera']);
         },
         error: (error) => {
           console.error('Error al eliminar la carrera:', error);
           this.isLoading = false;
-          alert('Ocurrió un error al eliminar la carrera');
+          /* alert('Ocurrió un error al eliminar la carrera'); */
         }
       });
     }
