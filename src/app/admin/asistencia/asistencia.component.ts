@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-asistencia',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './asistencia.component.html',
-  styleUrl: './asistencia.component.css'
+  styleUrls: ['./asistencia.component.css']
 })
 export class AsistenciaComponent {
 

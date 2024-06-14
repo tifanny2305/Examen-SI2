@@ -60,7 +60,6 @@ export class ApiService {
     localStorage.removeItem(this.tokenKey);
     this.router.navigate(['/login']);
   }
-
   // --------------------------- Materia
 
   getAllMaterias(): Observable<any[]> {
@@ -133,7 +132,7 @@ export class ApiService {
       );
   }
 
-  // --------------------------- Facultad
+  // --------------------------- Facultad ------------------------------------------------------------------------------------------------------------------------------------------------
 
    getAllFacultades(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/facultad/findAll`);
@@ -205,7 +204,7 @@ export class ApiService {
       );
   }
 
-  // --------------------------- Grupo
+  // --------------------------- Grupo ------------------------------------------------------------------------------------------------------------------------------------------
 
   getAllGrupos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/grupo/findAll`);
@@ -277,7 +276,7 @@ export class ApiService {
       );
   }
 
-  // --------------------------- Usuario
+  // --------------------------- Usuario -----------------------------------------------------------------------------------------------------------------------------------------------
 
   getAllUsuarios(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/usuario/findAll`);
@@ -366,4 +365,164 @@ export class ApiService {
         })
       );
   }
+
+  // --------------------------- Carrera -----------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllCarreras(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/carrera/findAll`);
+  }
+
+  getCarreraById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/carrera/find/${id}`);
+  }
+
+  createCarrera(carrera: { nombre: string, facultad: { id: number } }): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/carrera/save`, carrera, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear la carrera:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateCarrera(id: string, carrera: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.apiUrl}/api/carrera/update/${id}`, carrera, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar la carrera';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+  }
+
+
+
+  deleteCarrera(id: string): Observable<any> {
+    if (!this.isAuthenticated()) {
+      return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/carrera/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar la carrera';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
+  }
+
+  // ------------------------------------ Modulo-------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllModulos(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/modulo/findAll`);
+  }
+
+  getModuloById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/modulo/find/${id}`);
+  }
+
+  // ------------------------------------ Administradores -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllAdministradores(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/admin/findAll`);
+  }
+
+  getAdministradorById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/admin/find/${id}`);
+  }
+
+  // ------------------------------------ Docenete -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllDocentes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/docente/findAll`);
+  }
+
+  getDoceneteById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/docente/find/${id}`);
+  }
+
+  // ------------------------------------ Asistencia -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllAsistencias(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/asistencia/findAll`);
+  }
+
+  getAsistenciaById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/asistencia/find/${id}`);
+  }
+
+  // ------------------------------------ Aula -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllAula(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/aula/findAll`);
+  }
+
+  getAulaById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/aula/find/${id}`);
+  }
+
+  // ------------------------------------ Carga Horaria -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllCargaHorarias(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/cargahoraria/findAll`);
+  }
+
+  getCargaHorariaById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/cargahoraria/find/${id}`);
+  }
+
+  // ------------------------------------ Gestion -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllGestiones(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/gestion/findAll`);
+  }
+
+  getGestionById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/gestion/find/${id}`);
+  }
+
+  // ------------------------------------ Horario -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllHorarios(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/horario/findAll`);
+  }
+
+  getHorarioById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/horario/find/${id}`);
+  }
 }
+

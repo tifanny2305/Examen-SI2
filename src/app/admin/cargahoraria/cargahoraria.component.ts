@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cargahoraria',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './cargahoraria.component.html',
-  styleUrl: './cargahoraria.component.css'
+  styleUrls: ['./cargahoraria.component.css']
 })
 export class CargahorariaComponent {
 

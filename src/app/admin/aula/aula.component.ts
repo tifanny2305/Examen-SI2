@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-aula',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './aula.component.html',
-  styleUrl: './aula.component.css'
+  styleUrls: ['./aula.component.css']
 })
 export class AulaComponent {
 

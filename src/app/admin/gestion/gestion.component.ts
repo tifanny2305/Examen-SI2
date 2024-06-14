@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-gestion',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './gestion.component.html',
-  styleUrl: './gestion.component.css'
+  styleUrls: ['./gestion.component.css']
 })
 export class GestionComponent {
 

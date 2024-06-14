@@ -3,7 +3,6 @@ import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { response } from 'express';
 
 @Component({
   selector: 'app-crear',

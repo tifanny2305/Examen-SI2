@@ -12,9 +12,7 @@ import { CargahorariaComponent } from './admin/cargahoraria/cargahoraria.compone
 import { GestionComponent } from './admin/gestion/gestion.component';
 import { GrupoComponent } from './admin/grupo/grupo.component';
 import { LicenciaComponent } from './admin/licencia/licencia.component';
-import { NivelComponent } from './admin/nivel/nivel.component';
 import { UsuarioComponent } from './admin/usuario/usuario.component';
-import { CarreraComponent } from './admin/carrera/carrera.component';
 import { CrearComponent } from './admin/materia/crear/crear.component';
 import { EditarComponent } from './admin/materia/editar/editar.component';
 import { ListaComponent } from './admin/materia/lista/lista.component';
@@ -31,6 +29,32 @@ import { EditargComponent } from './admin/grupo/editarg/editarg.component';
 import { ListaUComponent } from './admin/usuario/lista-u/lista-u.component';
 import { CrearUComponent } from './admin/usuario/crear-u/crear-u.component';
 import { EditarUComponent } from './admin/usuario/editar-u/editar-u.component';
+import { CarreraComponent } from './admin/carrera/carrera.component';
+import { ListacComponent } from './admin/carrera/listac/listac.component';
+import { CrearcComponent } from './admin/carrera/crearc/crearc.component';
+import { EditarcComponent } from './admin/carrera/editarc/editarc.component';
+import { ListaAComponent } from './admin/administrador/lista-a/lista-a.component';
+import { CrearAComponent } from './admin/administrador/crear-a/crear-a.component';
+import { EditarAComponent } from './admin/administrador/editar-a/editar-a.component';
+import { ListaMaComponent } from './admin/maestro/lista-ma/lista-ma.component';
+import { CrearMaComponent } from './admin/maestro/crear-ma/crear-ma.component';
+import { EditarMaComponent } from './admin/maestro/editar-ma/editar-ma.component';
+import { ListaModComponent } from './admin/modulo/lista-mod/lista-mod.component';
+import { CrearModComponent } from './admin/modulo/crear-mod/crear-mod.component';
+import { EditarModComponent } from './admin/modulo/editar-mod/editar-mod.component';
+import { ListaAsisComponent } from './admin/asistencia/lista-asis/lista-asis.component';
+import { CrearAsisComponent } from './admin/asistencia/crear-asis/crear-asis.component';
+import { EditarAsisComponent } from './admin/asistencia/editar-asis/editar-asis.component';
+import { ListaAulComponent } from './admin/aula/lista-aul/lista-aul.component';
+import { CrearAulComponent } from './admin/aula/crear-aul/crear-aul.component';
+import { EditarAulComponent } from './admin/aula/editar-aul/editar-aul.component';
+import { ListaChComponent } from './admin/cargahoraria/lista-ch/lista-ch.component';
+import { CrearChComponent } from './admin/cargahoraria/crear-ch/crear-ch.component';
+import { EditarChComponent } from './admin/cargahoraria/editar-ch/editar-ch.component';
+import { ListahComponent } from './admin/horario/listah/listah.component';
+import { HorarioComponent } from './admin/horario/horario.component';
+import { CrearhComponent } from './admin/horario/crearh/crearh.component';
+import { EditarhComponent } from './admin/horario/editarh/editarh.component';
 
 export const routes: Routes = [
     {
@@ -73,13 +97,39 @@ export const routes: Routes = [
                 path: 'administrador',
                 title: 'Administrador',
                 component: AdministradorComponent,
-                data: { icon: 'fa-solid fa-user' }
+                children:[
+                  {
+                    path: '',
+                        component: ListaAComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearAComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarAComponent
+                  }
+                ]
               },
               {
                 path: 'maestro',
                 title: 'Maestro',
                 component: MaestroComponent,
-                data: { icon: 'fa-solid fa-chalkboard-teacher' }
+                children:[
+                  {
+                    path: '',
+                        component: ListaMaComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearMaComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarMaComponent
+                  }
+                ]
               },
               {
                 path: 'materia',
@@ -104,7 +154,20 @@ export const routes: Routes = [
                 path: 'modulo',
                 title: 'Modulo',
                 component: ModuloComponent,
-                data: { icon: 'fa-solid fa-cubes' }
+                children:[
+                  {
+                    path: '',
+                        component: ListaModComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearModComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarModComponent
+                  }
+                ]
               },
               {
                 path: 'facultad',
@@ -126,22 +189,80 @@ export const routes: Routes = [
                 ]
               },
               {
+                path: 'carrera',
+                title: 'Carrera',
+                component: CarreraComponent,
+                children:[
+                  {
+                    path: '',
+                        component: ListacComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearcComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                        component: EditarcComponent
+                  }
+                ]
+              },
+              {
                 path: 'asistencia',
                 title: 'Asistencia',
                 component: AsistenciaComponent,
-                data: { icon: 'fa-solid fa-calendar-check' }
+                children:[
+                  {
+                    path: '',
+                        component: ListaAsisComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearAsisComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarAsisComponent
+                  }
+                ]
               },
               {
                 path: 'aula',
                 title: 'Aula',
                 component: AulaComponent,
-                data: { icon: 'fa-solid fa-door-open' }
+                children:[
+                  {
+                    path: '',
+                        component: ListaAulComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearAulComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarAulComponent
+                  }
+                ]
               },
               {
                 path: 'carga-horaria',
                 title: 'Carga Horaria',
                 component: CargahorariaComponent,
-                data: { icon: 'fa-solid fa-clock' }
+                children:[
+                  {
+                    path: '',
+                        component: ListaChComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearChComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarChComponent
+                  }
+                ]
               },
               {
                 path: 'gestion',
@@ -188,10 +309,23 @@ export const routes: Routes = [
                 data: { icon: 'fa-solid fa-id-card' }
               },
               {
-                path: 'nivel',
-                title: 'Nivel',
-                component: NivelComponent,
-                data: { icon: 'fa-solid fa-layer-group' }
+                path: 'horario',
+                title: 'Horario',
+                component: HorarioComponent,
+                children:[
+                  {
+                    path: '',
+                        component: ListahComponent
+                  },
+                  {
+                    path: 'crear',
+                        component: CrearhComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                      component: EditarhComponent
+                  }
+                ]
               },
               {
                 path: 'carrera',

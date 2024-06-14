@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-maestro',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './maestro.component.html',
-  styleUrl: './maestro.component.css'
+  styleUrls: ['./maestro.component.css']
 })
 export class MaestroComponent {
 
