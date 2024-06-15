@@ -44,7 +44,7 @@
                     {{ carga.administrador.nombre }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ carga.fecha }}
+                    {{ carga.fecha | date : "dd-MM-yyyy" }}
                 </td>
                 <td class="px-6 py-4">
                     {{ carga.gestion.nombre }}

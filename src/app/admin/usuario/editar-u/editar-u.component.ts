@@ -13,15 +13,15 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./editar-u.component.css']
 })
 export class EditarUComponent implements OnInit {
-  usuario: any = { username: '', email: '', password: '' };
-  isLoading = false;
+  isLoading: boolean = false;
+  user: any = {  
+    username: '',
+    email: '',
+    password: '',
+    roles: ''
+  };
 
-  constructor(
-    private route: ActivatedRoute,
-    private apiService: ApiService,
-    private router: Router
-  ) { }
-
+  constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute){}
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -36,7 +36,7 @@ export class EditarUComponent implements OnInit {
     this.isLoading = true;
     this.apiService.getUsuarioById(id).subscribe(
       (data: any) => {
-        this.usuario = data;
+        this.user = data;
         this.isLoading = false;
       },
       error => {
@@ -48,18 +48,17 @@ export class EditarUComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
+    if (confirm('¿Estás seguro de que deseas actualizar este usuario?')) {
       this.isLoading = true;
-      this.apiService.updateUsuario(id, this.usuario.username, this.usuario.email, this.usuario.password).subscribe({
-        next: (response) => {
+      this.apiService.updateUsuario(this.user.id, this.user).subscribe({
+        next: () => {
           alert('Usuario actualizado exitosamente');
           this.isLoading = false;
-          this.router.navigate(['/usuario']);
+          this.router.navigate(['/usuario']);  
         },
         error: (error) => {
           console.error('Error al actualizar el usuario:', error);
-          console.log(error);
+          alert('Ocurrió un error al actualizar el usuario: ' + error.message);
           this.isLoading = false;
         }
       });
@@ -67,23 +66,20 @@ export class EditarUComponent implements OnInit {
   }
 
   onDelete(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este usuario?');
-      if (confirmDelete) {
-        this.isLoading = true;
-        this.apiService.deleteUsuario(id).subscribe({
-          next: (response) => {
-            alert('Usuario eliminado exitosamente');
-            this.isLoading = false;
-            this.router.navigate(['/usuario']);
-          },
-          error: (error) => {
-            console.error('Error al eliminar el usuario:', error);
-            this.isLoading = false;
-          }
-        });
-      }
+    if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
+      this.isLoading = true;
+      this.apiService.deleteUsuario(this.user.id).subscribe({
+        next: () => {
+          alert('Usuario eliminado exitosamente');
+          this.isLoading = false;
+          this.router.navigate(['/usuario']);  
+        },
+        error: (error) => {
+          console.error('Error al eliminar el usuario:', error);
+          alert('Ocurrió un error al eliminar el usuario: ' + error.message);
+          this.isLoading = false;
+        }
+      });
     }
   }
 }

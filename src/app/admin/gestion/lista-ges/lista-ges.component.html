@@ -32,10 +32,10 @@
                     {{ gestion.nombre }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ gestion.fechaInicio }}
+                    {{ gestion.fechaInicio | date : "dd-MM-yyyy" }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ gestion.fechaFin }}
+                    {{ gestion.fechaFin  | date : "dd-MM-yyyy"}}
                 </td>
                 <td class="px-6 py-4">
                     <a [routerLink]="['/gestion/editar', gestion.id]" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>

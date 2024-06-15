@@ -298,7 +298,7 @@ export class ApiService {
         'Content-Type': 'application/json'
     });
 
-    return this.http.post<any>(`${this.apiUrl}/api/usuario/save`, usuario, { headers : headers})
+    return this.http.post<any>(`${this.apiUrl}/api/usuario/createUser`, usuario, { headers : headers})
     .pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error al crear la usuario:', error.message, error.status, error);
@@ -349,7 +349,6 @@ export class ApiService {
         })
       );
   }
-
 
   // --------------------------- Carrera -----------------------------------------------------------------------------------------------------------------------------------------
   
@@ -507,6 +506,71 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/api/admin/find/${id}`);
   }
 
+  createAdministrador(administrador: any ): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/admin/save`, administrador, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear la administrador:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateAdministrador(id: string, administrador: any): Observable<any> {
+    const token = this.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/admin/update/${id}`, administrador, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar la administrador';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+}
+ 
+  deleteAdministrador(id: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/admin/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar la administrador';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
+  }
+
   // ------------------------------------ Docenete -------------------------------------------------------------------------------------------------------------------------------------
 
   getAllDocentes(): Observable<any[]> {
@@ -515,6 +579,71 @@ export class ApiService {
 
   getDoceneteById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/api/docente/find/${id}`);
+  }
+
+  createDocente(docente: any ): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/docente/save`, docente, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear el docente:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateDocente(id: string, docente: any): Observable<any> {
+    const token = this.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/docente/update/${id}`, docente, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar la docente';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+}
+ 
+  deleteDocente(id: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/docente/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar la docente';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
   }
 
   // ------------------------------------ Asistencia -------------------------------------------------------------------------------------------------------------------------------------

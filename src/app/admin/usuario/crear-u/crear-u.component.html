@@ -1,51 +1,37 @@
-<div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Crear Usuario</h1>
-  
-    <form (ngSubmit)="onCreate()">
-      <div class="mb-4">
-        <label for="username" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
-        <input
-          type="text"
-          id="username"
-          [(ngModel)]="username"
-          name="username"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          required
-        />
-      </div>
-  
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
-        <input
-          type="email"
-          id="email"
-          [(ngModel)]="email"
-          name="email"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          required
-        />
-      </div>
-  
-      <div class="mb-4">
-        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          [(ngModel)]="password"
-          name="password"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          required
-        />
-      </div>
-  
-      <div class="flex space-x-4">
-        <button
-          type="submit"
-          class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-        >
-          Crear
-        </button>
-      </div>
-    </form>
-  </div>
-  
+<div class="max-w-lg mx-auto mt-8">
+  <h2 class="text-xl font-semibold mb-4">Crear Usuario</h2>
+  <form (ngSubmit)="onCreate()" #userForm="ngForm">
+
+    <!-- username -->
+    <div class="mb-4">
+      <label for="username" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
+      <input type="text" id="username" required [(ngModel)]="user.username" name="username" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+      
+    </div>
+
+    <!-- email -->
+    <div class="mb-4">
+      <label for="email" class="block text-sm font-medium text-gray-700">email</label>
+      <input type="email" id="email" required [(ngModel)]="user.email" name="email">
+    </div>
+
+    <!-- password -->
+    <div class="mb-4">
+      <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+      <input type="password" iid="password" required [(ngModel)]="user.password" name="password">
+    </div>
+
+    <!-- ROLES -->
+    <div>
+      <label for="roles">Roles:</label>
+      <select multiple id="roles" required [(ngModel)]="user.roles" name="roles">
+        <option value="ADMIN">ADMIN</option>
+        <option value="DOCENTE">DOCENTE</option>
+      </select>
+    </div>
+
+    <div class="flex justify-end">
+      <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Crear Usuario</button>
+    </div>
+  </form>
+</div>

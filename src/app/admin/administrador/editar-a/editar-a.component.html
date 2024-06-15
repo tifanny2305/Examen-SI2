@@ -1,1 +1,42 @@
-<p>editar-a works!</p>
+<form [formGroup]="administradorForm" (ngSubmit)="update()">
+    <!-- nombre -->
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" formControlName="nombre">
+      <div *ngIf="administradorForm.get('nombre')?.invalid && administradorForm.get('nombre')?.touched">
+        Nombre es requerido
+      </div>
+    </div>
+    
+    <!-- apellidoP -->
+    <div>
+      <label for="apellidoP">Apellido Paterno:</label>
+      <input id="apellidoP" formControlName="apellidoP">
+      <div *ngIf="administradorForm.get('apellidoP')?.invalid && administradorForm.get('apellidoP')?.touched">
+        Apellido Paterno es requerido
+      </div>
+    </div>
+  
+    <!-- apellidoM -->
+    <div>
+      <label for="apellidoM">Apellido Materno:</label>
+      <input id="apellidoM" formControlName="apellidoM">
+      <div *ngIf="administradorForm.get('apellidoM')?.invalid && administradorForm.get('apellidoM')?.touched">
+        Apellido Materno es requerido
+      </div>
+    </div>
+  
+    <div formGroupName="usuario"> 
+      <label for="usuarioId">Usuario:</label>
+      <select id="usuarioId" formControlName="id">
+        <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.username }}</option>
+      </select>
+      <div *ngIf="administradorForm.get('usuario.id')?.invalid && administradorForm.get('usuario.id')?.touched">
+        Usuario es requerido
+      </div>
+    </div>
+    
+    <button type="submit" [disabled]="administradorForm.invalid">Actualizar</button>
+    <button type="button" (click)="onDelete()" [disabled]="administradorForm.invalid">Eliminar</button>
+</form>
+  
