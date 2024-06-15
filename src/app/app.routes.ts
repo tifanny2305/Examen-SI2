@@ -156,7 +156,7 @@ export const routes: Routes = [
                 ]
               },
               {
-                path: 'carrera materia',
+                path: 'carrera-materia',
                 title: 'Carrea Materia',
                 component: CarreraMateriaComponent,
                 children:[

@@ -1010,4 +1010,77 @@ export class ApiService {
       );
   }
 
+  // ------------------------------------ Carrera Materia -------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllCarreraMateria(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/carreramateria/findAll`);
+  }
+
+  getCarreraMateriaById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/carreramateria/find/${id}`);
+  }
+
+  createCarreraMateria(carreramateria: any ): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/carreramateria/save`, carreramateria, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear la carrer amateria:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateCarreraMateria(id: string, carreramateria: any): Observable<any> {
+    const token = this.getToken(); 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/carreramateria/update/${id}`, carreramateria, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar la carrera materia';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+}
+ 
+  deleteCarreraMateria(id: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/carreramateria/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar el carrera materia';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
+  }
+
 }
