@@ -334,81 +334,52 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/api/usuario/find/${id}`);
   }
 
-  createUsuario(
-    username: string,
-    email: string,
-    password: string
-  ): Observable<any> {
+
+  createUsuario(usuario: any ): Observable<any> {
     if (!this.isAuthenticated()) {
-      return throwError('Token is invalid or expired');
+        return throwError('Token is invalid or expired');
     }
 
     const token = this.getToken();
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
     });
 
-    const usuario = { username, email, password };
-
-    return this.http
-      .post<any>(`${this.apiUrl}/api/createUser`, usuario, { headers })
-      .pipe(
-        catchError((error) => {
-          console.error('Error al crear el usuario:', error);
-          return throwError(error);
-        })
-      );
-  }
-
-  updateUsuario(
-    id: string,
-    username: string,
-    email: string,
-    password: string
-  ): Observable<any> {
-    if (!this.isAuthenticated()) {
-      return throwError('Token is invalid or expired');
-    }
-
-    const token = this.getToken();
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-
-    const usuario = { username, email, password };
-
-    return this.http
-      .put<any>(`${this.apiUrl}/api/usuario/update/${id}`, usuario, {
-        headers,
-        responseType: 'text' as 'json',
+    return this.http.post<any>(`${this.apiUrl}/api/usuario/save`, usuario, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear la usuario:', error.message, error.status, error);
+        return throwError(error);
       })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          let errorMessage = 'Error desconocido al actualizar el usuario';
-          if (error.error instanceof ErrorEvent) {
-            // Error del cliente
-            errorMessage = `Error: ${error.error.message}`;
-          } else {
-            // Error del servidor
-            errorMessage = `Error: ${error.status}: ${error.error.message}`;
-          }
-          console.error(errorMessage);
-          return throwError(errorMessage);
-        })
-      );
+    );
   }
 
-  deleteUsuario(id: string): Observable<any> {
-    if (!this.isAuthenticated()) {
-      return throwError('Token is invalid or expired');
-    }
+  updateUsuario(id: string, usuario: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
 
+    return this.http.put<any>(`${this.apiUrl}/api/usuario/update/${id}`, usuario, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar el usuario';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+}
+  deleteUsuario(id: string): Observable<any> {
     const token = this.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
+
     });
 
     return this.http
@@ -432,8 +403,9 @@ export class ApiService {
       );
   }
 
+
   // --------------------------- Carrera -----------------------------------------------------------------------------------------------------------------------------------------
-  
+
   getAllCarreras(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/carrera/findAll`);
   }
@@ -640,6 +612,69 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/api/asistencia/find/${id}`);
   }
 
+  createAsistencia(asistencia: any ): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/asistencia/save`, asistencia, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear la asistencia:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateAsistencia(id: string, asistencia: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/asistencia/update/${id}`, asistencia, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar la asistencia';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+}
+
+  deleteAsistencia(id: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/asistencia/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar la asistencia';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
+  }
+
   // ------------------------------------ Aula -------------------------------------------------------------------------------------------------------------------------------------
 
   getAllAula(): Observable<any[]> {
@@ -738,6 +773,69 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/api/cargahoraria/find/${id}`);
   }
 
+  createCargaHoraria(cargahoraria: any ): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/cargahoraria/save`, cargahoraria, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear la carga horaria:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateCargaHoraria(id: string, cargahoraria: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/cargahoraria/update/${id}`, cargahoraria, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar la carga horaria';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+  }
+
+  deleteCargaHoraria(id: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/cargahoraria/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar la carga horaria';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
+  }
+
   // ------------------------------------ Gestion -------------------------------------------------------------------------------------------------------------------------------------
 
   getAllGestiones(): Observable<any[]> {
@@ -746,6 +844,68 @@ export class ApiService {
 
   getGestionById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/api/gestion/find/${id}`);
+  }
+
+  createGestion(gestion: any): Observable<any> {
+    if (!this.isAuthenticated()) {
+      return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/gestion/save`, gestion, { headers: headers })
+      .pipe(
+        catchError(error => {
+          console.error('Error al crear la gestion:', error);
+          return throwError(error);
+        })
+      );
+  }
+
+  updateGestion(id: string, gestion: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.apiUrl}/api/gestion/update/${id}`, gestion, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar la gestion';
+        if (error.error instanceof ErrorEvent) {
+          // Error del cliente
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          // Error del servidor
+          errorMessage = `Error: ${error.status}: ${error.error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
+  }
+
+  deleteGestion(id: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete(`${this.apiUrl}/api/gestion/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar la gestion';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
   }
 
   // ------------------------------------ Horario -------------------------------------------------------------------------------------------------------------------------------------
@@ -757,4 +917,68 @@ export class ApiService {
   getHorarioById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/api/horario/find/${id}`);
   }
+  createHorario(horario: any ): Observable<any> {
+    if (!this.isAuthenticated()) {
+        return throwError('Token is invalid or expired');
+    }
+
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/horario/save`, horario, { headers : headers})
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error al crear el horario:', error.message, error.status, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateHorario(id: string, horario: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/horario/update/${id}`, horario, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error desconocido al actualizar el horario';
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error: ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage);
+        return throwError(errorMessage);
+      })
+    );
 }
+
+  deleteHorario(id: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+
+    return this.http.delete(`${this.apiUrl}/api/horario/delete/${id}`, { headers, responseType: 'text' as 'json' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Error desconocido al eliminar el horario';
+          if (error.error instanceof ErrorEvent) {
+            // Error del cliente
+            errorMessage = `Error del cliente: ${error.error.message}`;
+          } else {
+            // Error del servidor
+            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+          }
+          console.error('Error completo:', error);
+          return throwError(errorMessage);
+        })
+      );
+  }
+
+}
+

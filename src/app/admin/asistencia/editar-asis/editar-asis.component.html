@@ -1,1 +1,53 @@
-<p>editar-asis works!</p>
+<form [formGroup]="asistenciaForm" (ngSubmit)="update()">
+   
+    <!-- estado -->
+    <div>
+      <label for="estado">estado:</label>
+      <input id="estado" formControlName="estado" type="text">
+      <div *ngIf="asistenciaForm.get('estado')?.invalid && asistenciaForm.get('estado')?.touched">
+       
+      </div>
+    </div>
+
+    <!-- hora -->
+    <div>
+        <label for="hora">Hora :</label>
+        <input id="hora" formControlName="hora" type="time">
+        <div *ngIf="asistenciaForm.get('hora')?.invalid && asistenciaForm.get('hora')?.touched">
+
+        </div>
+      </div>
+
+
+    <!-- fecha -->
+    <div>
+        <label for="fecha">fecha:</label>
+        <input id="fecha" formControlName="fecha" type="text">
+        <div *ngIf="asistenciaForm.get('fecha')?.invalid && asistenciaForm.get('fecha')?.touched">
+     
+        </div>
+    </div>
+
+    <!-- observacion -->
+    <div>
+        <label for="observacion">observacion:</label>
+        <input id="observacion" formControlName="observacion" type="text">
+        <div *ngIf="asistenciaForm.get('observacion')?.invalid && asistenciaForm.get('observacion')?.touched">
+         
+        </div>
+    </div>
+  
+    <!-- horario -->
+    <div formGroupName="horario"> 
+      <label for="horarioId">horario:</label>
+      <select id="horarioId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+        <option *ngFor="let horario of horarios" [value]="horario.id">{{ horario.dia }}</option>
+      </select>
+      <div *ngIf="asistenciaForm.get('horario.id')?.invalid && asistenciaForm.get('horario.id')?.touched">
+
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="asistenciaForm.invalid">Actualizar</button>
+    <button type="button" (click)="onDelete()" [disabled]="asistenciaForm.invalid">Eliminar</button>
+</form>

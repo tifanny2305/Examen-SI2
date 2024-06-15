@@ -1,1 +1,65 @@
-<p>editarh works!</p>
+<form [formGroup]="horarioForm" (ngSubmit)="update()">
+   
+    <!-- Dia -->
+    <div>
+      <label for="dia">Nombre:</label>
+      <input id="dia" formControlName="dia" type="text">
+      <div *ngIf="horarioForm.get('dia')?.invalid && horarioForm.get('dia')?.touched">
+       
+      </div>
+    </div>
+
+    <!-- hora inicio -->
+    <div>
+        <label for="horaInicio">Hora Inicio:</label>
+        <input id="horaInicio" formControlName="horaInicio" type="time">
+        <div *ngIf="horarioForm.get('horaInicio')?.invalid && horarioForm.get('horaInicio')?.touched">
+
+        </div>
+      </div>
+
+
+    <!-- hora fin -->
+    <div>
+        <label for="horaFin">Hora Fin:</label>
+        <input id="horaFin" formControlName="horaFin" type="time">
+        <div *ngIf="horarioForm.get('horaFin')?.invalid && horarioForm.get('horaFin')?.touched">
+     
+        </div>
+    </div>
+  
+    <!-- materia -->
+    <div formGroupName="materia"> 
+      <label for="materiaId">materia:</label>
+      <select id="materiaId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+        <option *ngFor="let materia of materias" [value]="materia.id">{{ materia.nombre }}</option>
+      </select>
+      <div *ngIf="horarioForm.get('materia.id')?.invalid && horarioForm.get('materia.id')?.touched">
+
+      </div>
+    </div>
+
+    <!-- grupo -->
+    <div formGroupName="grupo"> 
+        <label for="grupoId">grupo:</label>
+        <select id="grupodId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+          <option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.sigla }}</option>
+        </select>
+        <div *ngIf="horarioForm.get('grupo.id')?.invalid && horarioForm.get('grupo.id')?.touched">
+   
+        </div>
+      </div>
+
+      <!-- aula -->
+    <div formGroupName="aula"> 
+        <label for="aulaId">aula:</label>
+        <select id="aulaId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+          <option *ngFor="let aula of aulas" [value]="aula.id">{{ aula.numero }}</option>
+        </select>
+        <div *ngIf="horarioForm.get('aula.id')?.invalid && horarioForm.get('aula.id')?.touched">
+        </div>
+      </div>
+  
+    <button type="submit" [disabled]="horarioForm.invalid">Actualizar</button>
+    <button type="button" (click)="onDelete()" [disabled]="horarioForm.invalid">Eliminar</button>
+</form>
