@@ -38,7 +38,7 @@
                     {{ asistencia.estado }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ asistencia.fecha }}
+                    {{ asistencia.fecha | date : "dd-MM-yyyy" }}
                 </td>
                 <td class="px-6 py-4">
                     {{ asistencia.hora }}
@@ -47,8 +47,8 @@
                     {{ asistencia.observacion }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ asistencia.horario.horaInicio }} <p></p>
-                    {{ asistencia.horario.horaFin }}
+                    {{ asistencia.horario.dia}} <p></p>
+
                 </td>
                 <td class="px-6 py-4">
                     <a [routerLink]="['/asistencia/editar', asistencia.id]" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>

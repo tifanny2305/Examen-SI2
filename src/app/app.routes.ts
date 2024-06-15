@@ -55,6 +55,10 @@ import { ListahComponent } from './admin/horario/listah/listah.component';
 import { HorarioComponent } from './admin/horario/horario.component';
 import { CrearhComponent } from './admin/horario/crearh/crearh.component';
 import { EditarhComponent } from './admin/horario/editarh/editarh.component';
+import { CarreraMateriaComponent } from './admin/carrera-materia/carrera-materia.component';
+import { ListaCMComponent } from './admin/carrera-materia/lista-cm/lista-cm.component';
+import { CrearCMComponent } from './admin/carrera-materia/crear-cm/crear-cm.component';
+import { EditarCMComponent } from './admin/carrera-materia/editar-cm/editar-cm.component';
 
 export const routes: Routes = [
   {
@@ -149,6 +153,25 @@ export const routes: Routes = [
           {
             path: 'editar/:id',
             component: EditarComponent,
+          },
+        ],
+      },
+      {
+        path: 'carrera materia',
+        title: 'Carrea Materia',
+        component: CarreraMateriaComponent,
+        children: [
+          {
+            path: '',
+            component: ListaCMComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearCMComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarCMComponent,
           },
         ],
       },
