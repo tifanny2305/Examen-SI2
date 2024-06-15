@@ -1,1 +1,28 @@
-<p>editar-cm works!</p>
+<form [formGroup]="carreramateriaForm" (ngSubmit)="update()">
+    
+    <!-- materia -->
+    <div formGroupName="materia"> 
+      <label for="materiaId">materia:</label>
+      <select id="materiaId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+        <option *ngFor="let materia of materias" [value]="materia.id">{{ materia.nombre }}</option>
+      </select>
+      <div *ngIf="carreramateriaForm.get('materia.id')?.invalid && carreramateriaForm.get('materia.id')?.touched">
+
+      </div>
+    </div>
+
+    <!-- carrera -->
+    <div formGroupName="carrera"> 
+        <label for="carreraId">carrera:</label>
+        <select id="carreraId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+          <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
+        </select>
+        <div *ngIf="carreramateriaForm.get('carrera.id')?.invalid && carreramateriaForm.get('carrera.id')?.touched">
+   
+        </div>
+      </div>   
+  
+    <button type="submit" [disabled]="carreramateriaForm.invalid">Actualizar</button>
+    <button type="button" (click)="onDelete()" [disabled]="carreramateriaForm.invalid">Eliminar</button>
+
+</form>

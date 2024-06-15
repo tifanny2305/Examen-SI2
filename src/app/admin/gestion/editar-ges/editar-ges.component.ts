@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ApiService } from '../../../services/api.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
@@ -9,9 +14,9 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './editar-ges.component.html',
-  styleUrls: ['./editar-ges.component.css']
+  styleUrls: ['./editar-ges.component.css'],
 })
-export class EditarGesComponent implements OnInit{
+export class EditarGesComponent implements OnInit {
   gestionForm: FormGroup;
   isLoading = false;
 
@@ -26,7 +31,7 @@ export class EditarGesComponent implements OnInit{
       id: [''],
       nombre: ['', Validators.required],
       fechaInicio: ['', Validators.required],
-      fechaFin: ['', Validators.required]
+      fechaFin: ['', Validators.required],
     });
   }
 
@@ -45,17 +50,24 @@ export class EditarGesComponent implements OnInit{
     this.apiService.getGestionById(id).subscribe(
       (data: any) => {
         // Utiliza patchValue para establecer los valores recibidos en el formulario
-        this.gestionForm.patchValue(data); 
+        data.fechaInicio = this.formatDate(data.fechaInicio);
+        data.fechaFin = this.formatDate(data.fechaFin);
+        this.gestionForm.patchValue(data);
         this.isLoading = false;
       },
-      error => {
+      (error) => {
         console.error('Error al obtener el modulo', error);
         this.isLoading = false;
         alert('Ocurrió un error al obtener el modulo');
       }
     );
   }
-
+  private formatDate(date: string): string {
+    const newDate = new Date(date);
+    // Asegúrate de obtener el formato yyyy-MM-dd
+    const formattedDate = newDate.toISOString().substring(0, 10);
+    return formattedDate;
+  }
   update(): void {
     if (this.gestionForm.valid) {
       this.isLoading = true;
@@ -70,16 +82,20 @@ export class EditarGesComponent implements OnInit{
         error: (error) => {
           console.error('Error al actualizar la gestion:', error);
           this.isLoading = false;
-          alert('Ocurrió un error al actualizar el gestion. Verifica los permisos.');
-        }
+          alert(
+            'Ocurrió un error al actualizar el gestion. Verifica los permisos.'
+          );
+        },
       });
     } else {
       alert('Por favor completa el formulario correctamente');
     }
   }
-  
+
   onDelete(): void {
-    const confirmDelete = confirm('¿Estás seguro de que deseas eliminar esta gestion?');
+    const confirmDelete = confirm(
+      '¿Estás seguro de que deseas eliminar esta gestion?'
+    );
     if (confirmDelete) {
       this.isLoading = true;
       const gestionId = this.gestionForm.value.id;
@@ -94,7 +110,7 @@ export class EditarGesComponent implements OnInit{
           console.error('Error al eliminar la gestion:', error);
           this.isLoading = false;
           alert('Ocurrió un error al eliminar la gestion');
-        }
+        },
       });
     }
   }

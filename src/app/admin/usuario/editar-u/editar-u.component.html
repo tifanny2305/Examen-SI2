@@ -1,63 +1,76 @@
+<div class="card">
+  <h1 class="text-2xl font-bold mb-4">Editar Usuario</h1>
 
-<div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Editar Usuario</h1>
-
-    <form (ngSubmit)="onSubmit()" *ngIf="user">
+  <form (ngSubmit)="onSubmit()" *ngIf="user">
+    <div class="mb-4">
+      <label for="username" class="block text-sm font-medium text-gray-700"
+        >Username</label
+      >
+      <input
+        type="text"
+        id="username"
+        required
+        [(ngModel)]="user.username"
+        name="username"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      />
+    </div>
+    <div class="grid grid-cols-2 gap-4">
       <div class="mb-4">
-        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-        <input
-          type="text"
-          id="username"
-          required [(ngModel)]="user.username"
-          name="username"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
-      </div>
-
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <label for="email" class="block text-sm font-medium text-gray-700"
+          >Email</label
+        >
         <input
           type="email"
           id="email"
-          required [(ngModel)]="user.email"
+          required
+          [(ngModel)]="user.email"
           name="email"
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
       <div class="mb-4">
-        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <label for="password" class="block text-sm font-medium text-gray-700"
+          >Password</label
+        >
         <input
           type="password"
           id="password"
-          required [(ngModel)]="user.password"
+          required
+          [(ngModel)]="user.password"
           name="password"
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           required
         />
       </div>
+    </div>
 
-      <!-- ROLES -->
-      <div>
-        <label for="roles" class="block text-sm font-medium text-gray-700">Roles:</label>
-        <select multiple id="roles" required [(ngModel)]="user.roles" name="roles">
-          <option value="ADMIN">ADMIN</option>
-          <option value="DOCENTE">DOCENTE</option>
-        </select>
-      </div>
+    <!-- ROLES -->
+    <div>
+      <label for="roles" class="block text-sm font-medium text-gray-700"
+        >Roles:</label
+      >
+      <select
+        multiple
+        id="roles"
+        class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-lg focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+        required
+        [(ngModel)]="user.roles"
+        name="roles"
+      >
+        <option value="ADMIN">ADMIN</option>
+        <option value="DOCENTE">DOCENTE</option>
+      </select>
+    </div>
 
-      <div class="flex space-x-4">
-        <button
-          type="submit"
-          class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-          Actualizar
-        </button>
-        <button
-          type="button"
-          (click)="onDelete()"
-          class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
-          Eliminar
-        </button>
-      </div>
-    </form>
-  </div>
-
+    <div class="flex space-x-4 justify-end">
+      <button type="submit" class="btngray">
+        <i class="fa-solid fa-arrows-rotate"></i> Actualizar
+      </button>
+      <button type="button" (click)="onDelete()" class="btngray">
+        <i class="fa-solid fa-trash"></i> Eliminar
+      </button>
+    </div>
+  </form>
+</div>

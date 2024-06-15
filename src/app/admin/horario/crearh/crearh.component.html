@@ -1,70 +1,145 @@
-<div class="max-w-lg mx-auto mt-8">
-    <h2 class="text-xl font-semibold mb-4">Crear Nuevo Horario</h2>
-    <form [formGroup]="horarioForm" (ngSubmit)="onCreate()">
-
-        <!-- DIA -->
-      <div class="mb-4">
-        <label for="dia" class="block text-sm font-medium text-gray-700">Dia</label>
-        <input type="text" id="dia" formControlName="dia" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="horarioForm.get('dia')?.invalid && horarioForm.get('dia')?.touched">
-
-        </div>
-      </div>
-
-       <!-- horaInicio -->
-       <div class="mb-4">
-        <label for="horaInicio" class="block text-sm font-medium text-gray-700">Hora Inicio</label>
-        <input type="time" id="horaInicio" formControlName="horaInicio" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="horarioForm.get('horaInicio')?.invalid && horarioForm.get('horaInicio')?.touched">
-
-        </div>
-      </div>
-
-       <!-- horaFin -->
-       <div class="mb-4">
-        <label for="horaFin" class="block text-sm font-medium text-gray-700">Hora Fin</label>
-        <input type="time" id="horaFin" formControlName="horaFin" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="horarioForm.get('horaFin')?.invalid && horarioForm.get('horaFin')?.touched">
-
-        </div>
-      </div>
+<div class="card">
+  <h2 class="text-xl font-semibold mb-4">Crear Nuevo Horario</h2>
+  <form [formGroup]="horarioForm" (ngSubmit)="onCreate()">
+    <div class="grid grid-cols-2 gap-4">
 
       <!-- materia -->
       <div class="mb-4" formGroupName="materia">
-        <label for="materiaId" class="block text-sm font-medium text-gray-700">Materia</label>
-        <select id="materiaId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-          <option *ngFor="let materia of materias" [value]="materia.id">{{ materia.nombre }}</option>
+        <label for="materiaId" class="block text-sm font-medium text-gray-700"
+          >Materia</label
+        >
+        <select
+          id="materiaId"
+          formControlName="id"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        >
+          <option value="" disabled selected>Seleccione una materia</option>
+          <option *ngFor="let materia of materias" [value]="materia.id">
+            {{ materia.nombre }}
+          </option>
         </select>
-        <div *ngIf="horarioForm.get('materia.id')?.invalid && horarioForm.get('materia.id')?.touched">
-
-        </div>
+        <div
+          *ngIf="
+            horarioForm.get('materia.id')?.invalid &&
+            horarioForm.get('materia.id')?.touched
+          "
+        ></div>
       </div>
 
       <!-- grupo -->
       <div class="mb-4" formGroupName="grupo">
-        <label for="grupoId" class="block text-sm font-medium text-gray-700">Grupo</label>
-        <select id="grupoId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-          <option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.sigla }}</option>
+        <label for="grupoId" class="block text-sm font-medium text-gray-700"
+          >Grupo</label
+        >
+        <select
+          id="grupoId"
+          formControlName="id"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        >
+        <option value="" disabled selected >Seleccione un grupo</option>
+          <option *ngFor="let grupo of grupos" [value]="grupo.id">
+            {{ grupo.sigla }}
+          </option>
         </select>
-        <div *ngIf="horarioForm.get('grupo.id')?.invalid && horarioForm.get('grupo.id')?.touched">
-
-        </div>
+        <div
+          *ngIf="
+            horarioForm.get('grupo.id')?.invalid &&
+            horarioForm.get('grupo.id')?.touched
+          "
+        ></div>
       </div>
+      <!-- DIA -->
+      <div class="mb-4">
+        <label for="dia" class="block text-sm font-medium text-gray-700"
+          >Dia</label
+        >
+        <input
+          type="text"
+          id="dia"
+          formControlName="dia"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+          placeholder="Introduce el dia al que pertenecera el horario"
+        />
+        <div
+          *ngIf="
+            horarioForm.get('dia')?.invalid && horarioForm.get('dia')?.touched
+          "
+        ></div>
+      </div>
+
+      <!-- horaInicio -->
+      <div class="mb-4">
+        <label for="horaInicio" class="block text-sm font-medium text-gray-700"
+          >Hora Inicio</label
+        >
+        <input
+          type="time"
+          id="horaInicio"
+          formControlName="horaInicio"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        />
+        <div
+          *ngIf="
+            horarioForm.get('horaInicio')?.invalid &&
+            horarioForm.get('horaInicio')?.touched
+          "
+        ></div>
+      </div>
+
+      <!-- horaFin -->
+      <div class="mb-4">
+        <label for="horaFin" class="block text-sm font-medium text-gray-700"
+          >Hora Fin</label
+        >
+        <input
+          type="time"
+          id="horaFin"
+          formControlName="horaFin"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        />
+        <div
+          *ngIf="
+            horarioForm.get('horaFin')?.invalid &&
+            horarioForm.get('horaFin')?.touched
+          "
+        ></div>
+      </div>
+
 
       <!-- aula -->
       <div class="mb-4" formGroupName="aula">
-        <label for="aulaId" class="block text-sm font-medium text-gray-700">Aula</label>
-        <select id="aulaId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-          <option *ngFor="let aula of aulas" [value]="aula.id">{{ aula.numero }}</option>
+        <label for="aulaId" class="block text-sm font-medium text-gray-700"
+          >Aula</label
+        >
+        <select
+          id="aulaId"
+          formControlName="id"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        >
+        <option value="" disabled selected >Seleccione un aula</option>
+          <option *ngFor="let aula of aulas" [value]="aula.id">
+            {{ aula.numero }}
+          </option>
         </select>
-        <div *ngIf="horarioForm.get('aula.id')?.invalid && horarioForm.get('aula.id')?.touched">
-
-        </div>
+        <div
+          *ngIf="
+            horarioForm.get('aula.id')?.invalid &&
+            horarioForm.get('aula.id')?.touched
+          "
+        ></div>
       </div>
+    </div>
 
-      <div class="flex justify-end">
-        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Crear Horario</button>
-      </div>
-
-    </form>
+    <div class="flex justify-end">
+      <button type="submit" class="btngray">
+        <i class="fa-solid fa-bookmark"></i> Crear Horario
+      </button>
+    </div>
+  </form>
 </div>

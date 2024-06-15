@@ -1,1 +1,49 @@
-<p>lista-cm works!</p>
+<div class="card">
+  <div class="flex justify-between mb-4">
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+      Listado de materia con sus carreras
+    </h2>
+    <a [routerLink]="['/carrera-materia/crear']" class="btngray">Crear</a>
+  </div>
+  <div class="relative overflow-x-auto rounded-lg">
+    <table
+      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    >
+      <thead class="text-xs text-white uppercase bg-gray-700">
+        <tr>
+          <th scope="col" class="px-6 py-3">ID</th>
+          <th scope="col" class="px-6 py-3">Materia</th>
+          <th scope="col" class="px-6 py-3">Carrera</th>
+          <th scope="col" class="px-6 py-3">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let carreramateria of carreramaterias"
+          class="odd:bg-white odd:dark:bg-gray-900 even:bg-stone-200 even:dark:bg-gray-800 border-b dark:border-gray-700"
+        >
+          <th
+            scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            {{ carreramateria.id }}
+          </th>
+          <td class="px-6 py-4">
+            {{ carreramateria.materia.nombre }}
+          </td>
+          <td class="px-6 py-4">
+            {{ carreramateria.carrera.nombre }}
+          </td>
+
+          <td class="px-6 py-4">
+            <a
+              [routerLink]="['/carrera-materia/editar', carreramateria.id]"
+              class="font-medium btngray"
+              ><i class="fa-solid fa-pen-to-square"></i> Edit</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

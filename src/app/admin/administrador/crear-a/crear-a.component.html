@@ -1,50 +1,101 @@
-<div class="max-w-lg mx-auto mt-8">
-    <h2 class="text-xl font-semibold mb-4">Crear Nuevo administrador</h2>
-    <form [formGroup]="administradorForm" (ngSubmit)="onCreate()">
-
-        <!-- nombre -->
+<div class="card">
+  <h2 class="text-xl font-semibold mb-4">Crear Nuevo administrador</h2>
+  <form [formGroup]="administradorForm" (ngSubmit)="onCreate()">
+    <div class="grid grid-cols-2 gap-4">
+      <!-- nombre -->
       <div class="mb-4">
-        <label for="nombre" class="block text-sm font-medium text-gray-700">nombre</label>
-        <input type="text" id="nombre" formControlName="nombre" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="administradorForm.get('nombre')?.invalid && administradorForm.get('nombre')?.touched">
-
-        </div>
+        <label for="nombre" class="block text-sm font-medium text-gray-700"
+          >nombre</label
+        >
+        <input
+          type="text"
+          id="nombre"
+          formControlName="nombre"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+          placeholder="Introduce el nombre del administrador"
+        />
+        <div
+          *ngIf="
+            administradorForm.get('nombre')?.invalid &&
+            administradorForm.get('nombre')?.touched
+          "
+        ></div>
       </div>
 
       <!-- apellidoP -->
       <div class="mb-4">
-        <label for="apellidoP" class="block text-sm font-medium text-gray-700">apellido Paterno</label>
-        <input type="text" id="apellidoP" formControlName="apellidoP" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="administradorForm.get('apellidoP')?.invalid && administradorForm.get('apellidoP')?.touched">
-
-        </div>
+        <label for="apellidoP" class="block text-sm font-medium text-gray-700"
+          >Apellido Paterno</label
+        >
+        <input
+          type="text"
+          id="apellidoP"
+          formControlName="apellidoP"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+          placeholder="Introduce el apellido paterno del administrador"
+        />
+        <div
+          *ngIf="
+            administradorForm.get('apellidoP')?.invalid &&
+            administradorForm.get('apellidoP')?.touched
+          "
+        ></div>
       </div>
 
       <!-- apellidoM -->
       <div class="mb-4">
-        <label for="apellidoM" class="block text-sm font-medium text-gray-700">apellido Materno</label>
-        <input type="text" id="apellidoM" formControlName="apellidoM" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="administradorForm.get('apellidoM')?.invalid && administradorForm.get('apellidoM')?.touched">
-
-        </div>
+        <label for="apellidoM" class="block text-sm font-medium text-gray-700"
+          >Apellido Materno</label
+        >
+        <input
+          type="text"
+          id="apellidoM"
+          formControlName="apellidoM"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+          placeholder="Introduce el apellido materno del administrador"
+        />
+        <div
+          *ngIf="
+            administradorForm.get('apellidoM')?.invalid &&
+            administradorForm.get('apellidoM')?.touched
+          "
+        ></div>
       </div>
-
 
       <div class="mb-4" formGroupName="usuario">
-        <label for="usuarioId" class="block text-sm font-medium text-gray-700">usuario</label>
-        <select id="usuarioId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-          <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.username }}</option>
+        <label for="usuarioId" class="block text-sm font-medium text-gray-700"
+          >Usuario</label
+        >
+        <select
+          id="usuarioId"
+          formControlName="id"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        >
+          <option value="" disabled selected >Seleccione un usuario</option>
+          <option *ngFor="let usuario of usuarios" [value]="usuario.id">
+            {{ usuario.username }}
+          </option>
         </select>
-        <div *ngIf="administradorForm.get('usuario.id')?.invalid && administradorForm.get('usuario.id')?.touched">
-
-        </div>
+        <div
+          *ngIf="
+            administradorForm.get('usuario.id')?.invalid &&
+            administradorForm.get('usuario.id')?.touched
+          "
+        ></div>
       </div>
+    </div>
 
-      <div class="flex justify-end">
-        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-            Crear administrador
-        </button>
-      </div>
-
-    </form>
+    <div class="flex justify-end">
+      <button
+        type="submit"
+        class="btngray "
+      >
+        <i class="fa-solid fa-bookmark"></i>  Crear administrador
+      </button>
+    </div>
+  </form>
 </div>

@@ -1,38 +1,82 @@
-<div class="max-w-lg mx-auto mt-8">
+<div class="card">
   <h2 class="text-xl font-semibold mb-4">Crear Usuario</h2>
   <form (ngSubmit)="onCreate()" #userForm="ngForm">
-
     <!-- username -->
     <div class="mb-4">
-      <label for="username" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
-      <input type="text" id="username" required [(ngModel)]="user.username" name="username" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-
+      <label for="username" class="block text-sm font-medium text-gray-700"
+        >Nombre de usuario</label
+      >
+      <input
+        type="text"
+        id="username"
+        required
+        [(ngModel)]="user.username"
+        name="username"
+        class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+        required
+        placeholder="Introduce el nombre del usuario"
+      />
     </div>
+    <div class="grid grid-cols-2 gap-4">
+      <!-- email -->
+      <div class="col-span-1 mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700"
+          >Email</label
+        >
+        <input
+          type="email"
+          id="email"
+          required
+          [(ngModel)]="user.email"
+          name="email"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+          placeholder="Introduce el Correo Electronico"
+        />
+      </div>
 
-    <!-- email -->
-    <div class="mb-4">
-      <label for="email" class="block text-sm font-medium text-gray-700">email</label>
-      <input type="email" id="email" required [(ngModel)]="user.email" name="email">
-    </div>
-
-    <!-- password -->
-    <div class="mb-4">
-      <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-      <input type="password" iid="password" required [(ngModel)]="user.password" name="password">
+      <!-- password -->
+      <div class="col-span-1 mb-4">
+        <label for="password" class="block text-sm font-medium text-gray-700"
+          >Contraseña</label
+        >
+        <input
+          type="password"
+          iid="password"
+          required
+          [(ngModel)]="user.password"
+          name="password"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+          placeholder="Introduce controseña de 8 digitos"
+        />
+      </div>
     </div>
 
     <!-- ROLES -->
     <div>
-      <label for="roles">Roles:</label>
-      <select multiple id="roles" required [(ngModel)]="user.roles" name="roles">
+      <label for="roles" class="block text-sm font-medium text-gray-700">Roles:</label>
+      <select
+        multiple
+        id="roles"
+        required
+        [(ngModel)]="user.roles"
+        name="roles"
+        class=" w-full rounded-md border-gray-300 shadow-sm "
+        required
+      >
         <option value="ADMIN">ADMIN</option>
         <option value="DOCENTE">DOCENTE</option>
       </select>
     </div>
 
     <div class="flex justify-end">
-      <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Crear Usuario</button>
+      <button
+        type="submit"
+        class="btngray "
+      >
+        <i class="fa-solid fa-bookmark"></i>  Crear Usuario
+      </button>
     </div>
   </form>
 </div>
-
