@@ -1060,27 +1060,24 @@ export class ApiService {
     );
 }
  
-  deleteCarreraMateria(id: string): Observable<any> {
-    const token = this.getToken();
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-    });
+deleteCarreraMateria(id: string): Observable<any> {
+  const token = this.getToken();
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
 
-    return this.http.delete(`${this.apiUrl}/api/carreramateria/delete/${id}`, { headers, responseType: 'text' as 'json' })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          let errorMessage = 'Error desconocido al eliminar el carrera materia';
-          if (error.error instanceof ErrorEvent) {
-            // Error del cliente
-            errorMessage = `Error del cliente: ${error.error.message}`;
-          } else {
-            // Error del servidor
-            errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
-          }
-          console.error('Error completo:', error);
-          return throwError(errorMessage);
-        })
-      );
-  }
+  return this.http.delete(`${this.apiUrl}/api/carrera-materia/delete/${id}`, { headers, responseType: 'text' as 'json' }).pipe(
+    catchError((error: HttpErrorResponse) => {
+      let errorMessage = 'Error desconocido al eliminar el carrera materia';
+      if (error.error instanceof ErrorEvent) {
+        errorMessage = `Error del cliente: ${error.error.message}`;
+      } else {
+        errorMessage = `Error del servidor: ${error.status} - ${error.message}`;
+      }
+      console.error('Error completo:', error);
+      return throwError(errorMessage);
+    })
+  );
+}
 
 }

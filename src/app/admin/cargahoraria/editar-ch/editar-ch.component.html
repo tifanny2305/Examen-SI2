@@ -1,1 +1,77 @@
-<p>editar-ch works!</p>
+<form [formGroup]="cargahorariaForm" (ngSubmit)="update()">
+   
+     <!-- fecha -->
+     <div>
+        <label for="fecha">fecha:</label>
+        <input id="fecha" formControlName="fecha" type="date">
+        <div *ngIf="cargahorariaForm.get('fecha')?.invalid && cargahorariaForm.get('fecha')?.touched">
+
+        </div>
+      </div>
+  
+    <!-- docente -->
+    <div formGroupName="docente"> 
+        <label for="docenteId">docente:</label>
+        <select id="docenteId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+        <option *ngFor="let docente of docentes" [value]="docente.id">{{ docente.nombre }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('docente.id')?.invalid && cargahorariaForm.get('docente.id')?.touched">
+        </div>
+    </div>
+
+    <!-- administrador -->
+    <div formGroupName="administrador"> 
+        <label for="administradorId">administrador:</label>
+        <select id="administradorId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+        <option *ngFor="let administrador of administradores" [value]="administrador.id">{{ administrador.nombre }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('administrador.id')?.invalid && cargahorariaForm.get('administrador.id')?.touched">
+        </div>
+    </div>
+
+    <!-- gestion -->
+    <div formGroupName="gestion"> 
+        <label for="gestionId">gestion:</label>
+        <select id="gestionId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+        <option *ngFor="let gestion of gestiones" [value]="gestion.id">{{ gestion.nombre }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('gestion.id')?.invalid && cargahorariaForm.get('gestion.id')?.touched">
+        </div>
+    </div>
+
+    <!-- materia -->
+    <div formGroupName="materia"> 
+      <label for="materiaId">materia:</label>
+      <select id="materiaId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+        <option *ngFor="let materia of materias" [value]="materia.id">{{ materia.nombre }}</option>
+      </select>
+      <div *ngIf="cargahorariaForm.get('materia.id')?.invalid && cargahorariaForm.get('materia.id')?.touched">
+
+      </div>
+    </div>
+
+    <!-- grupo -->
+    <div formGroupName="grupo"> 
+        <label for="grupoId">grupo:</label>
+        <select id="grupodId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+          <option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.sigla }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('grupo.id')?.invalid && cargahorariaForm.get('grupo.id')?.touched">
+   
+        </div>
+     </div>
+
+    <!-- carrera -->
+    <div formGroupName="carrera"> 
+        <label for="carreraId">carrera:</label>
+        <select id="carreradId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
+          <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
+        </select>
+        <div *ngIf="cargahorariaForm.get('carrera.id')?.invalid && cargahorariaForm.get('carrera.id')?.touched">
+   
+        </div>
+      </div>
+  
+    <button type="submit" [disabled]="cargahorariaForm.invalid">Actualizar</button>
+    <button type="button" (click)="onDelete()" [disabled]="cargahorariaForm.invalid">Eliminar</button>
+</form>

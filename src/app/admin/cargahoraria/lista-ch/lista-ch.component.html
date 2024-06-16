@@ -28,6 +28,9 @@
                     Materia
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Horario
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Acciones
                 </th>
             </tr>
@@ -54,6 +57,13 @@
                 </td>
                 <td class="px-6 py-4">
                     {{ carga.materia.nombre }}
+                </td>
+                <td class="px-6 py-4">
+                    <ul>
+                        <li *ngFor="let horario of carga.horarios">
+                            {{ horario.dia }}: {{ horario.horaInicio }} - {{ horario.horaFin }} (Aula: {{ horario.aula }})
+                        </li>
+                    </ul>
                 </td>
                 <td class="px-6 py-4">
                     <a [routerLink]="['/carga-horaria/editar', carga.id]" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a> <!-- Corregido carga-horaria.id a carga.id -->
