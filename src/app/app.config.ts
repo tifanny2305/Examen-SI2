@@ -9,9 +9,9 @@ import { ApiService } from './services/api.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection(
-    { eventCoalescing: true }), 
-    provideRouter(routes), 
-    provideClientHydration(), 
+    { eventCoalescing: true }),
+    provideRouter(routes),
+    provideClientHydration(),
     provideHttpClient(
       withFetch(), //global
       withInterceptors([authInterceptor])

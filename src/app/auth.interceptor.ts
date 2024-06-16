@@ -5,7 +5,7 @@ import { inject } from '@angular/core';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const apiService = inject(ApiService);
   const authToken = apiService.getToken();
-  
+
   if (authToken) {
     req = req.clone({
       setHeaders: {

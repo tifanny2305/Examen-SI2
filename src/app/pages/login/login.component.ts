@@ -47,10 +47,10 @@ export class LoginComponent {
       }
     );
   }
-  
+
   */
-  
-  
+
+
   /* loginObj: Login; tiff
 
   constructor(private http:HttpClient, private router: Router) {

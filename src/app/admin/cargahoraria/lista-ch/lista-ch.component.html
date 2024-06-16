@@ -1,64 +1,70 @@
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div class="flex justify-between mb-4">
-        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Listado de Carga Horaria</h2>
-        <a [routerLink]="['/carga-horaria/crear']" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-md focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 hover:bg-blue-700 dark:bg-blue-500 dark:border-blue-500 dark:hover:bg-blue-600 dark:focus:bg-blue-600 dark:active:bg-blue-700">Crear</a>
-    </div>
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    ID
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Docente
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Administrador
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Fecha
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Gestion
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Grupo
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Materia
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Acciones
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let carga of cargas" class="odd:bg-white odd:dark:bg-gray-900 even:bg-stone-200 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ carga.id }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ carga.docente.nombre }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ carga.administrador.nombre }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ carga.fecha | date : "dd-MM-yyyy" }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ carga.gestion.nombre }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ carga.grupo.sigla }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ carga.materia.nombre }}
-                </td>
-                <td class="px-6 py-4">
-                    <a [routerLink]="['/carga-horaria/editar', carga.id]" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a> <!-- Corregido carga-horaria.id a carga.id -->
-                </td>
-            </tr>
-        </tbody>
+<div class="card">
+  <div class="flex justify-between mb-4">
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+      Listado de Carga Horaria
+    </h2>
+    <a [routerLink]="['/carga-horaria/crear']" class="btngray">Crear</a>
+  </div>
+  <div class="relative overflow-x-auto rounded-lg">
+    <table
+      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    >
+      <thead class="text-xs text-white uppercase bg-gray-700">
+        <tr>
+          <th scope="col" class="px-4 py-3">ID</th>
+          <th scope="col" class="px-4 py-3">Fecha</th>
+          <th scope="col" class="px-4 py-3">Gestión</th>
+          <th scope="col" class="px-4 py-3">Docente</th>
+          <th scope="col" class="px-4 py-3">Materia</th>
+          <th scope="col" class="px-4 py-3">Grupo</th>
+          <th scope="col" class="px-4 py-3">Día</th>
+          <th scope="col" class="px-4 py-3">Hora</th>
+          <th scope="col" class="px-3 py-3">Aula</th>
+          <th scope="col" class="px-4 py-3">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let carga of cargas"
+          class="odd:bg-white odd:dark:bg-gray-900 even:bg-stone-200 even:dark:bg-gray-800 border-b dark:border-gray-700"
+        >
+          <th
+            scope="row"
+            class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            {{ carga.id }}
+          </th>
+          <td class="px-4 py-4">{{ carga.fecha | date : "dd-MM-yyyy" }}</td>
+          <td class="px-4 py-4">{{ carga.gestion.nombre }}</td>
+          <td class="px-4 py-4">{{ carga.docente.nombre }}</td>
+          <td class="px-4 py-4">{{ carga.materia.nombre }}</td>
+          <td class="px-4 py-4">{{ carga.grupo.sigla }}</td>
+          <td class="px-4 py-4">
+            <ul>
+              <li *ngFor="let horario of carga.horarios">{{ horario.dia }}</li>
+            </ul>
+          </td>
+          <td class="px-3 py-4">
+            <div *ngFor="let horario of carga.horarios">
+              <div>{{ horario.horaInicio }}</div>
+              <div>{{ horario.horaFin }}</div>
+            </div>
+          </td>
+          <td class="px-3 py-4">
+            <ul>
+              <li *ngFor="let horario of carga.horarios">{{ horario.aula }}</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <a
+              [routerLink]="['/carga-horaria/editar', carga.id]"
+              class="font-medium btngray"
+            >
+              <i class="fa-solid fa-pen-to-square"></i> Editar
+            </a>
+          </td>
+        </tr>
+      </tbody>
     </table>
+  </div>
 </div>

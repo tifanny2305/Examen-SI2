@@ -1,42 +1,119 @@
-<form [formGroup]="maestroForm" (ngSubmit)="update()">
-    <!-- nombre -->
-    <div>
-      <label for="nombre">Nombre:</label>
-      <input id="nombre" formControlName="nombre">
-      <div *ngIf="maestroForm.get('nombre')?.invalid && maestroForm.get('nombre')?.touched">
-        Nombre es requerido
+<div class="card">
+  <h2 class="text-xl font-semibold mb-4">Editar Docente</h2>
+  <form [formGroup]="maestroForm" (ngSubmit)="update()">
+    <div class="grid grid-cols-2 gap-3">
+      <!-- nombre -->
+      <div class="mb-4">
+        <label for="nombre" class="block text-sm font-medium text-gray-700 mb-2"
+          >Nombre</label
+        >
+        <input
+          type="text"
+          id="nombre"
+          formControlName="nombre"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        />
+        <div
+          *ngIf="
+            maestroForm.get('nombre')?.invalid &&
+            maestroForm.get('nombre')?.touched
+          "
+        >
+          Nombre es requerido
+        </div>
+      </div>
+
+      <!-- apellidoP -->
+      <div class="mb-4">
+        <label
+          for="apellidoP"
+          class="block text-sm font-medium text-gray-700 mb-2"
+          >Apellido Paterno</label
+        >
+        <input
+          type="text"
+          id="apellidoP"
+          formControlName="apellidoP"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        />
+        <div
+          *ngIf="
+            maestroForm.get('apellidoP')?.invalid &&
+            maestroForm.get('apellidoP')?.touched
+          "
+        >
+          Apellido Paterno es requerido
+        </div>
+      </div>
+
+      <!-- apellidoM -->
+      <div class="mb-4">
+        <label
+          for="apellidoM"
+          class="block text-sm font-medium text-gray-700 mb-2"
+          >Apellido Materno</label
+        >
+        <input
+          type="text"
+          id="apellidoM"
+          formControlName="apellidoM"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        />
+        <div
+          *ngIf="
+            maestroForm.get('apellidoM')?.invalid &&
+            maestroForm.get('apellidoM')?.touched
+          "
+        >
+          Apellido Materno es requerido
+        </div>
+      </div>
+
+      <!-- usuario -->
+      <div class="mb-4" formGroupName="usuario">
+        <label
+          for="usuarioId"
+          class="block text-sm font-medium text-gray-700 mb-2"
+          >Usuario</label
+        >
+        <select
+          id="usuarioId"
+          formControlName="id"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-lg focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        >
+          <option value="" disabled selected>Seleccione un Usuario</option>
+          <option *ngFor="let usuario of usuarios" [value]="usuario.id">
+            {{ usuario.username }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            maestroForm.get('usuario.id')?.invalid &&
+            maestroForm.get('usuario.id')?.touched
+          "
+        >
+          Usuario es requerido
+        </div>
       </div>
     </div>
-    
-    <!-- apellidoP -->
-    <div>
-      <label for="apellidoP">Apellido Paterno:</label>
-      <input id="apellidoP" formControlName="apellidoP">
-      <div *ngIf="maestroForm.get('apellidoP')?.invalid && maestroForm.get('apellidoP')?.touched">
-        Apellido Paterno es requerido
-      </div>
+
+    <!-- Botones -->
+    <div class="flex space-x-4 justify-end">
+      <button type="submit" [disabled]="maestroForm.invalid" class="btngray">
+        <i class="fa-solid fa-arrows-rotate"></i> Actualizar
+      </button>
+      <button
+        type="button"
+        (click)="onDelete()"
+        [disabled]="maestroForm.invalid"
+        class="btngray"
+      >
+        <i class="fa-solid fa-trash"></i> Eliminar
+      </button>
     </div>
-  
-    <!-- apellidoM -->
-    <div>
-      <label for="apellidoM">Apellido Materno:</label>
-      <input id="apellidoM" formControlName="apellidoM">
-      <div *ngIf="maestroForm.get('apellidoM')?.invalid && maestroForm.get('apellidoM')?.touched">
-        Apellido Materno es requerido
-      </div>
-    </div>
-  
-    <div formGroupName="usuario"> 
-      <label for="usuarioId">Usuario:</label>
-      <select id="usuarioId" formControlName="id">
-        <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.username }}</option>
-      </select>
-      <div *ngIf="maestroForm.get('usuario.id')?.invalid && maestroForm.get('usuario.id')?.touched">
-        Usuario es requerido
-      </div>
-    </div>
-    
-    <button type="submit" [disabled]="maestroForm.invalid">Actualizar</button>
-    <button type="button" (click)="onDelete()" [disabled]="maestroForm.invalid">Eliminar</button>
-</form>
-  
+  </form>
+</div>

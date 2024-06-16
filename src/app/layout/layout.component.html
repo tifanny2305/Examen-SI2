@@ -1,23 +1,18 @@
 <app-navegation />
 <app-sidebar />
 
-  <div class="p-4 sm:ml-64">
+<div class="p-4 sm:ml-64 ">
+  <div class="mt-14 py-5">
+    <div class="p-4 border-2  rounded-lg">
+      <div class="text-black px-2 mt-2 w-full">
+        <div class="mt-2">
 
-   <div class="mt-14 py-5">
+            <div class="text-black px-2 mt-2 w-full h-full">
+              <router-outlet></router-outlet>
+            </div>
 
-      <div class="p-4 border-2 border-gray-800 border-dashed rounded-lg ">
-
-         <div class="text-black px-2 mt-2  w-full">
-
-   <div class="mt-2">
-
-      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-
-         <div class="text-black px-2 mt-2 w-full">
-
-            <router-outlet></router-outlet>
-         </div>
-
+        </div>
       </div>
-   </div>
+    </div>
   </div>
+</div>

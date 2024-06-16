@@ -151,7 +151,7 @@ export class CrearChComponent  implements OnInit {
         next: (response) => {
           alert('carga horario creada exitosamente');
           this.isLoading = false;
-          this.router.navigate(['/cargahoraria']);
+          this.router.navigate(['/carga-horaria']);
         },
         error: (error) => {
           console.error('Error al crear el carga horaria:', error);

@@ -75,7 +75,7 @@
           class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           required
         >
-        <option value="" disabled selected >Seleccione un usuario </option>
+          <option value="" disabled selected>Seleccione un usuario</option>
           <option *ngFor="let usuario of usuarios" [value]="usuario.id">
             {{ usuario.username }}
           </option>
@@ -90,11 +90,8 @@
     </div>
 
     <div class="flex justify-end">
-      <button
-        type="submit"
-        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-      >
-        Crear docente
+      <button type="submit" class="btngray">
+        <i class="fa-solid fa-bookmark"></i> Crear docente
       </button>
     </div>
   </form>
