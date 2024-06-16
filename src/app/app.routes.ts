@@ -80,7 +80,7 @@ export const routes: Routes = [
               },
               {
                 path: 'usuario',
-                title: 'usuario',
+                title: 'Usuario',
                 component: UsuarioComponent,
                 children:[
                   {
