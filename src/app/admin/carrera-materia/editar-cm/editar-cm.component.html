@@ -1,28 +1,73 @@
-<form [formGroup]="carreramateriaForm" (ngSubmit)="update()">
-    
-    <!-- materia -->
-    <div formGroupName="materia"> 
-      <label for="materiaId">materia:</label>
-      <select id="materiaId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
-        <option *ngFor="let materia of materias" [value]="materia.id">{{ materia.nombre }}</option>
-      </select>
-      <div *ngIf="carreramateriaForm.get('materia.id')?.invalid && carreramateriaForm.get('materia.id')?.touched">
+<div class="card">
+  <h2 class="text-xl font-semibold mb-4">Editar Materia-Carrera</h2>
+  <form [formGroup]="carreramateriaForm" (ngSubmit)="update()">
+    <div class="grid grid-cols-2 gap-3 mb-3">
+      <!-- materia -->
+      <div formGroupName="materia">
+        <label
+          for="materiaId"
+          class="block text-sm font-medium text-gray-700 mb-2"
+          >Materia:</label
+        >
+        <select
+          id="materiaId"
+          formControlName="id"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-lg focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          <!-- Cambia formControlName a 'id' -->
+          <option *ngFor="let materia of materias" [value]="materia.id">
+            {{ materia.nombre }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            carreramateriaForm.get('materia.id')?.invalid &&
+            carreramateriaForm.get('materia.id')?.touched
+          "
+        ></div>
+      </div>
 
+      <!-- carrera -->
+      <div formGroupName="carrera">
+        <label
+          for="carreraId"
+          class="block text-sm font-medium text-gray-700 mb-2"
+          >Carrera:</label
+        >
+        <select
+          id="carreraId"
+          formControlName="id"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-lg focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          <!-- Cambia formControlName a 'id' -->
+          <option *ngFor="let carrera of carreras" [value]="carrera.id">
+            {{ carrera.nombre }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            carreramateriaForm.get('carrera.id')?.invalid &&
+            carreramateriaForm.get('carrera.id')?.touched
+          "
+        ></div>
       </div>
     </div>
-
-    <!-- carrera -->
-    <div formGroupName="carrera"> 
-        <label for="carreraId">carrera:</label>
-        <select id="carreraId" formControlName="id"> <!-- Cambia formControlName a 'id' -->
-          <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
-        </select>
-        <div *ngIf="carreramateriaForm.get('carrera.id')?.invalid && carreramateriaForm.get('carrera.id')?.touched">
-   
-        </div>
-      </div>   
-  
-    <button type="submit" [disabled]="carreramateriaForm.invalid">Actualizar</button>
-    <button type="button" (click)="onDelete()" [disabled]="carreramateriaForm.invalid">Eliminar</button>
-
-</form>
+    <div class="flex space-x-4 justify-end">
+      <button
+        type="submit"
+        [disabled]="carreramateriaForm.invalid"
+        class="btngray"
+      >
+        <i class="fa-solid fa-arrows-rotate"></i> Actualizar
+      </button>
+      <button
+        type="button"
+        (click)="onDelete()"
+        [disabled]="carreramateriaForm.invalid"
+        class="btngray"
+      >
+        <i class="fa-solid fa-trash"></i> Eliminar
+      </button>
+    </div>
+  </form>
+</div>

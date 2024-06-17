@@ -1,5 +1,5 @@
 <div class="card">
-  <h2 class="text-xl font-semibold mb-4">Edit horario</h2>
+  <h2 class="text-xl font-semibold mb-4">Editar Horario</h2>
   <form [formGroup]="horarioForm" (ngSubmit)="update()">
     <div class="grid grid-cols-2 gap-3 mb-3">
       <!-- materia -->
@@ -7,7 +7,7 @@
         formGroupName="materia"
         class="block text-sm font-medium text-gray-700 mb-2"
       >
-        <label for="materiaId">materia:</label>
+        <label for="materiaId">Materia:</label>
         <select
           id="materiaId"
           formControlName="id"
@@ -31,7 +31,7 @@
         <label
           for="grupoId"
           class="block text-sm font-medium text-gray-700 mb-2"
-          >grupo:</label
+          >Grupo:</label
         >
         <select
           id="grupodId"
@@ -113,7 +113,7 @@
       <!-- aula -->
       <div formGroupName="aula">
         <label for="aulaId" class="block text-sm font-medium text-gray-700 mb-2"
-          >aula:</label
+          >Aula:</label
         >
         <select
           id="aulaId"

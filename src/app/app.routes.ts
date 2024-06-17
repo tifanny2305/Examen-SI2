@@ -325,12 +325,12 @@ export const routes: Routes = [
                   }
                 ]
               },
-              {
+              /* {
                 path: 'licencia',
                 title: 'Licencia',
                 component: LicenciaComponent,
                 data: { icon: 'fa-solid fa-id-card' }
-              },
+              }, */
               {
                 path: 'horario',
                 title: 'Horario',
