@@ -3,11 +3,7 @@
     <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
       Listado de Asistencia
     </h2>
-    <a
-      [routerLink]="['/asistencia/crear']"
-      class="btngray"
-      >Crear</a
-    >
+    <a [routerLink]="['/asistencia/crear']" class="btngray">Crear</a>
   </div>
   <div class="relative overflow-x-auto rounded-lg">
     <table
@@ -16,10 +12,13 @@
       <thead class="text-xs text-white uppercase bg-gray-700">
         <tr>
           <th scope="col" class="px-6 py-3">ID</th>
-          <th scope="col" class="px-6 py-3">Estado</th>
+          <th scope="col" class="px-6 py-3">Nombre</th>
+          <th scope="col" class="px-6 py-3">Apellido</th>
           <th scope="col" class="px-6 py-3">Fecha</th>
           <th scope="col" class="px-6 py-3">Hora</th>
+          <th scope="col" class="px-6 py-3">Estado</th>
           <th scope="col" class="px-6 py-3">Observacion</th>
+          <th scope="col" class="px-6 py-3">Dia</th>
           <th scope="col" class="px-6 py-3">Horario</th>
         </tr>
       </thead>
@@ -35,7 +34,10 @@
             {{ asistencia.id }}
           </th>
           <td class="px-6 py-4">
-            {{ asistencia.estado }}
+            {{ asistencia.nombre }}
+          </td>
+          <td class="px-6 py-4">
+            {{ asistencia.apellido }}
           </td>
           <td class="px-6 py-4">
             {{ asistencia.fecha | date : "dd-MM-yyyy" }}
@@ -43,19 +45,23 @@
           <td class="px-6 py-4">
             {{ asistencia.hora }}
           </td>
+          <td class="px-6 py-4 font-bold">
+            <span [ngClass]="getEstadoClass(asistencia.estado)">
+              {{ getEstadoText(asistencia.estado) }}
+            </span>
+          </td>
           <td class="px-6 py-4">
             {{ asistencia.observacion }}
           </td>
           <td class="px-6 py-4">
             {{ asistencia.horario.dia }}
-            <p></p>
           </td>
           <td class="px-6 py-4">
-            <a
-              [routerLink]="['/asistencia/editar', asistencia.id]"
-              class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >Edit</a
-            >
+            <div>{{ asistencia.horario.horaInicio }}</div>
+            <div>
+              {{ asistencia.horario.horaFin }}
+              {{ asistencia.horario.aula }}
+            </div>
           </td>
         </tr>
       </tbody>

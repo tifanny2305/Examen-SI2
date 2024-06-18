@@ -1,59 +1,121 @@
-<div class="max-w-lg mx-auto mt-8">
-    <h2 class="text-xl font-semibold mb-4">Crear Nueva Asistencia</h2>
-    <form [formGroup]="asistenciaForm" (ngSubmit)="onCreate()">
-
-        <!-- estado -->
+<div class="card">
+  <h2 class="text-xl font-semibold mb-4">Crear Nueva Asistencia</h2>
+  <form [formGroup]="asistenciaForm" (ngSubmit)="onCreate()">
+    <div class="grid grid-cols-2 gap-2">
+      <!-- estado -->
       <div class="mb-4">
-        <label for="estado" class="block text-sm font-medium text-gray-700">estado</label>
-        <input type="text" id="estado" formControlName="estado" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="asistenciaForm.get('estado')?.invalid && asistenciaForm.get('estado')?.touched">
-
-        </div>
+        <label for="estado" class="block text-sm font-medium text-gray-700"
+          >estado</label
+        >
+        <input
+          type="text"
+          id="estado"
+          formControlName="estado"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+          placeholder="Introducir por defecto F "
+        />
+        <div
+          *ngIf="
+            asistenciaForm.get('estado')?.invalid &&
+            asistenciaForm.get('estado')?.touched
+          "
+        ></div>
       </div>
 
-       <!-- fecha -->
-       <div class="mb-4">
-        <label for="fecha" class="block text-sm font-medium text-gray-700">fecha</label>
-        <input type="date" id="fecha" formControlName="fecha" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="asistenciaForm.get('fecha')?.invalid && asistenciaForm.get('fecha')?.touched">
-
-        </div>
+      <!-- fecha -->
+      <div class="mb-4">
+        <label for="fecha" class="block text-sm font-medium text-gray-700"
+          >fecha</label
+        >
+        <input
+          type="date"
+          id="fecha"
+          formControlName="fecha"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        />
+        <div
+          *ngIf="
+            asistenciaForm.get('fecha')?.invalid &&
+            asistenciaForm.get('fecha')?.touched
+          "
+        ></div>
       </div>
 
-       <!-- hora -->
-       <div class="mb-4">
-        <label for="hora" class="block text-sm font-medium text-gray-700"> hora</label>
-        <input type="time" id="hora" formControlName="hora" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="asistenciaForm.get('hora')?.invalid && asistenciaForm.get('hora')?.touched">
-
-        </div>
+      <!-- hora -->
+      <div class="mb-4">
+        <label for="hora" class="block text-sm font-medium text-gray-700">
+          hora</label
+        >
+        <input
+          type="time"
+          id="hora"
+          formControlName="hora"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        />
+        <div
+          *ngIf="
+            asistenciaForm.get('hora')?.invalid &&
+            asistenciaForm.get('hora')?.touched
+          "
+        ></div>
       </div>
 
       <!-- observacion -->
       <div class="mb-4">
-        <label for="observacion" class="block text-sm font-medium text-gray-700">observacion</label>
-        <input type="text" id="observacion" formControlName="observacion" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-        <div *ngIf="asistenciaForm.get('observacion')?.invalid && asistenciaForm.get('observacion')?.touched">
-
-        </div>
+        <label for="observacion" class="block text-sm font-medium text-gray-700"
+          >observacion</label
+        >
+        <input
+          type="text"
+          id="observacion"
+          formControlName="observacion"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+          placeholder="Por defecto poner ninguno"
+        />
+        <div
+          *ngIf="
+            asistenciaForm.get('observacion')?.invalid &&
+            asistenciaForm.get('observacion')?.touched
+          "
+        ></div>
       </div>
 
       <!-- horario -->
       <div class="mb-4" formGroupName="horario">
-        <label for="horarioId" class="block text-sm font-medium text-gray-700">horario</label>
-        <select id="horarioId" formControlName="id" class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
-          <option *ngFor="let horario of horarios" [value]="horario.id">{{ horario.dia }}</option>
+        <label for="horarioId" class="block text-sm font-medium text-gray-700"
+          >horario</label
+        >
+        <select
+          id="horarioId"
+          formControlName="id"
+          class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          required
+        >
+        <option value="" disabled selected >Seleccione un Horario</option>
+          <option *ngFor="let horario of horarios" [value]="horario.id">
+            {{ horario.dia }}
+          </option>
         </select>
-        <div *ngIf="asistenciaForm.get('horario.id')?.invalid && asistenciaForm.get('horario.id')?.touched">
-
-        </div>
+        <div
+          *ngIf="
+            asistenciaForm.get('horario.id')?.invalid &&
+            asistenciaForm.get('horario.id')?.touched
+          "
+        ></div>
       </div>
+    </div>
 
-      <div class="flex justify-end">
-        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-            Crear Asistencia
-        </button>
-      </div>
-
-    </form>
+    <div class="flex justify-end">
+      <button
+        type="submit"
+        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+      >
+        Crear Asistencia
+      </button>
+    </div>
+  </form>
 </div>
