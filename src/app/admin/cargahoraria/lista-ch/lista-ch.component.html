@@ -36,7 +36,10 @@
           </th>
           <td class="px-4 py-4">{{ carga.fecha | date : "dd-MM-yyyy" }}</td>
           <td class="px-4 py-4">{{ carga.gestion.nombre }}</td>
-          <td class="px-4 py-4">{{ carga.docente.nombre }}</td>
+          <td class="px-4 py-4">
+            {{ carga.docente.nombre }} {{ carga.docente.apellidoP }}
+            {{ carga.docente.apellidoM }}
+          </td>
           <td class="px-4 py-4">{{ carga.materia.nombre }}</td>
           <td class="px-4 py-4">{{ carga.grupo.sigla }}</td>
           <td class="px-4 py-4">

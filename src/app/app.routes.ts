@@ -61,296 +61,302 @@ import { CrearCMComponent } from './admin/carrera-materia/crear-cm/crear-cm.comp
 import { EditarCMComponent } from './admin/carrera-materia/editar-cm/editar-cm.component';
 
 export const routes: Routes = [
-    {
-        path: '', redirectTo: 'login', pathMatch: 'full'
-    },
-    {
-        path: 'login',
-        component:LoginComponent
-    },
-    {
-        path: '',
-        component:LayoutComponent,
-        children:[
-            {
-                path: 'dashboard',
-                title: 'Dashboard',
-                component: DashboardComponent,
-                /* data: { icon: 'fa-solid fa-gauge' } */
-              },
-              {
-                path: 'usuario',
-                title: 'Usuario',
-                component: UsuarioComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaUComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearUComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarUComponent
-                  }
-                ]
-              },
-              {
-                path: 'administrador',
-                title: 'Administrador',
-                component: AdministradorComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaAComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearAComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarAComponent
-                  }
-                ]
-              },
-              {
-                path: 'maestro',
-                title: 'Maestro',
-                component: MaestroComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaMaComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearMaComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarMaComponent
-                  }
-                ]
-              },
-              {
-                path: 'materia',
-                title: 'Materia',
-                component: MateriaComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarComponent
-                  }
-                ]
-              },
-              {
-                path: 'carrera-materia',
-                title: 'Carrea Materia',
-                component: CarreraMateriaComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaCMComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearCMComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarCMComponent
-                  }
-                ]
-              },
-              {
-                path: 'modulo',
-                title: 'Modulo',
-                component: ModuloComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaModComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearModComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarModComponent
-                  }
-                ]
-              },
-              {
-                path: 'facultad',
-                title: 'Facultad',
-                component: FacultadComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListafComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearfComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarfComponent
-                  }
-                ]
-              },
-              {
-                path: 'carrera',
-                title: 'Carrera',
-                component: CarreraComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListacComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearcComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                        component: EditarcComponent
-                  }
-                ]
-              },
-              {
-                path: 'asistencia',
-                title: 'Asistencia',
-                component: AsistenciaComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaAsisComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearAsisComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarAsisComponent
-                  }
-                ]
-              },
-              {
-                path: 'aula',
-                title: 'Aula',
-                component: AulaComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaAulComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearAulComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarAulComponent
-                  }
-                ]
-              },
-              {
-                path: 'carga-horaria',
-                title: 'Carga Horaria',
-                component: CargahorariaComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaChComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearChComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarChComponent
-                  }
-                ]
-              },
-              {
-                path: 'gestion',
-                title: 'Gestion',
-                component: GestionComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListaGesComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearGesComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarGesComponent
-                  }
-                ]
-              },
-              {
-                path: 'grupo',
-                title: 'Grupo',
-                component: GrupoComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListagComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CreargComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditargComponent
-                  }
-                ]
-              },
-              /* {
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        title: 'Dashboard',
+        component: DashboardComponent,
+        /* data: { icon: 'fa-solid fa-gauge' } */
+      },
+      {
+        path: 'usuario',
+        title: 'Usuario',
+        component: UsuarioComponent,
+        children: [
+          {
+            path: '',
+            component: ListaUComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearUComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarUComponent,
+          },
+        ],
+      },
+      {
+        path: 'administrador',
+        title: 'Administrador',
+        component: AdministradorComponent,
+        children: [
+          {
+            path: '',
+            component: ListaAComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearAComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarAComponent,
+          },
+        ],
+      },
+      {
+        path: 'maestro',
+        title: 'Maestro',
+        component: MaestroComponent,
+        children: [
+          {
+            path: '',
+            component: ListaMaComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearMaComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarMaComponent,
+          },
+        ],
+      },
+      {
+        path: 'carrera',
+        title: 'Carrera',
+        component: CarreraComponent,
+        children: [
+          {
+            path: '',
+            component: ListacComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearcComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarcComponent,
+          },
+        ],
+      },
+      {
+        path: 'materia',
+        title: 'Materia',
+        component: MateriaComponent,
+        children: [
+          {
+            path: '',
+            component: ListaComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarComponent,
+          },
+        ],
+      },
+      {
+        path: 'grupo',
+        title: 'Grupo',
+        component: GrupoComponent,
+        children: [
+          {
+            path: '',
+            component: ListagComponent,
+          },
+          {
+            path: 'crear',
+            component: CreargComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditargComponent,
+          },
+        ],
+      },
+
+      {
+        path: 'carrera-materia',
+        title: 'Carrea Materia',
+        component: CarreraMateriaComponent,
+        children: [
+          {
+            path: '',
+            component: ListaCMComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearCMComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarCMComponent,
+          },
+        ],
+      },
+      {
+        path: 'facultad',
+        title: 'Facultad',
+        component: FacultadComponent,
+        children: [
+          {
+            path: '',
+            component: ListafComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearfComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarfComponent,
+          },
+        ],
+      },
+      {
+        path: 'modulo',
+        title: 'Modulo',
+        component: ModuloComponent,
+        children: [
+          {
+            path: '',
+            component: ListaModComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearModComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarModComponent,
+          },
+        ],
+      },
+      {
+        path: 'aula',
+        title: 'Aula',
+        component: AulaComponent,
+        children: [
+          {
+            path: '',
+            component: ListaAulComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearAulComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarAulComponent,
+          },
+        ],
+      },
+      {
+        path: 'gestion',
+        title: 'Gestion',
+        component: GestionComponent,
+        children: [
+          {
+            path: '',
+            component: ListaGesComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearGesComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarGesComponent,
+          },
+        ],
+      },
+      {
+        path: 'horario',
+        title: 'Horario',
+        component: HorarioComponent,
+        children: [
+          {
+            path: '',
+            component: ListahComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearhComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarhComponent,
+          },
+        ],
+      },
+
+      {
+        path: 'carga-horaria',
+        title: 'Carga Horaria',
+        component: CargahorariaComponent,
+        children: [
+          {
+            path: '',
+            component: ListaChComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearChComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarChComponent,
+          },
+        ],
+      },
+
+
+      /* {
                 path: 'licencia',
                 title: 'Licencia',
                 component: LicenciaComponent,
                 data: { icon: 'fa-solid fa-id-card' }
               }, */
-              {
-                path: 'horario',
-                title: 'Horario',
-                component: HorarioComponent,
-                children:[
-                  {
-                    path: '',
-                        component: ListahComponent
-                  },
-                  {
-                    path: 'crear',
-                        component: CrearhComponent
-                  },
-                  {
-                    path: 'editar/:id',
-                      component: EditarhComponent
-                  }
-                ]
-              },
-        ]
-    },
 
+      {
+        path: 'asistencia',
+        title: 'Asistencia',
+        component: AsistenciaComponent,
+        children: [
+          {
+            path: '',
+            component: ListaAsisComponent,
+          },
+          {
+            path: 'crear',
+            component: CrearAsisComponent,
+          },
+          {
+            path: 'editar/:id',
+            component: EditarAsisComponent,
+          },
+        ],
+      },
+    ],
+  },
 ];
